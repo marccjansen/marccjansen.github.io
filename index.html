@@ -1,38 +1,38 @@
 ---
 layout: default
-title: Home
+title: Hello!
+description: Data Scientist in NYC
+featured_image: /images/social.jpg
 ---
 
-<div class="posts">
-  {% for post in paginator.posts %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ site.baseurl }}/{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
 
-    <span class="post-date">{{ post.date | date_to_string }}</span>
+<section class="portfolio">
 
-    {{ post.content }}
-  </div>
-  {% endfor %}
-</div>
+	<div class="content-wrap portfolio-wrap">
 
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ site.baseurl }}/page{{paginator.next_page}}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/">Newer</a>
-    {% else %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/page{{paginator.previous_page}}">Newer</a>
-    {% endif %}
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
-</div>
+		{% for post in site.posts %}
 
+		<div class="portfolio-item">
+
+			<a class="portfolio-item__link" href="{{ post.url | relative_url }}">
+
+				<div class="portfolio-item__image">
+					<img src="{{ post.featured_image | relative_url }}" alt="{{ post.title }}">
+				</div>
+
+				<div class="portfolio-item__content">
+					<div class="portfolio-item__info">
+						<h2 class="portfolio-item__title">{{ post.title }}</h2>
+						<p class="portfolio-item__subtitle">{{ post.subtitle }}</p>
+					</div>
+				</div>
+
+			</a>
+
+		</div>
+
+		{% endfor %}
+
+	</div>
+
+</section>

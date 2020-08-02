@@ -1,25 +1,57 @@
-# Permalinks
-#
-# Use of `relative_permalinks` ensures post links from the index work properly.
-permalink:           pretty
+site: Marc Jansen
 
-# Setup
-title:               'Marc Jansen'
-tagline:             'Data Scientist'
-description:         'Personal project page'
-url:                 ''
-baseurl:             ''
-paginate:            5
+url: https://marccjansen.com
+baseurl: 
 
-# About/contact
-author:
-  name:              Marc Jansen
-  url:               https://twitter.com/marcchristiaan
-  email:             marc.c.jansen@gmail.com
+collections:
+  pages:
+    output: true
+    permalink: /:name
+  posts:
+    output: true
+    permalink: /blog/:slug
+  projects:
+    output: true
+    permalink: /project/:slug
 
-# Custom vars
-version:             1.0.0
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  -
+    scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
 
-# Social
-github_username:     marccjansen
-twitter_username:    marcchristiaan
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+
+paginate: 6
+paginate_path: "/blog/page:num/"
+  
