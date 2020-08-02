@@ -1,10 +1,14 @@
 ---
 title: Contact
-subtitle: Index comes with a built-in contact form, that's free and easy to set up.
+subtitle: Contact me using this form!
 description: Index is a minimal, fixed sidebar grid portfolio Jekyll theme.
 featured_image: /images/demo/demo-landscape.jpg
 ---
 
-{% include contact-form.html %}
+📬
+---
+Feel free to contact me about speaking engagement, if you're
+interested in joining my team, or if you think I can help you or your
+organization do more with data.
 
-We've made a contact form that you can use with [Formspree](https://formspree.io/create/jekyllthemes) to handle up to 50 submissions per month for free. You could also easily switch out the end-point to use another contact form service.
+{% include contact-form.html %}

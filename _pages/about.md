@@ -1,35 +1,30 @@
 ---
-title: About Index
-subtitle: Index is a minimal, fixed sidebar grid portfolio Jekyll theme. Perfect for designers, artists, photographers and developers to use for their portfolio website.
-description: Index is a minimal, fixed sidebar grid portfolio Jekyll theme.
-featured_image: /images/demo/demo-landscape.jpg
+title: Hi there!
 ---
 
-![](/images/demo/demo-landscape.jpg)
+🗽
+---
+I'm a data scientist at [Decoded](https://decoded.com) in New York. At Decoded
+I build and deliver data skills and digital leadership programs, working with
+global clients to accelerate strategic investment in technology and data
+capabilities.
 
-## Features
 
-Index is packed with powerful features to showcase your work:
+🚀
+---
 
-* Beautiful, minimal design
-* Fixed sidebar menu
-* Two-column masonry grid layout
-* Responsive – works perfectly on all devices
-* Portfolio post type
-* Blog with pagination
-* Sleek Ajax navigation and page transitions
-* Unique 'gallery' feature for image grids and carousels
-* Built-in contact form with Formspree integration
-* Full markdown support and code highlighting
-* Social media icons
-* Fast page rendering
-* Built with SEO best practices in mind
-* Customize everything – colors, spacing, fonts, sizes etc. – via a simple settings file
-* Works with GitHub Pages
-* Updated and supported by the developers
+I started my career in data science with [Gousto](https://www.gousto.co.uk)
+in London, UK. Since joining in early 2017, I worked on development and 
+production deployment of algorithms for personalization and inventory management.
+As the third data science hire, I helped grow the team to ten members and led
+a squad responsible for the company's warehouse optimization algorithms. 
 
-## Get Index
+📖
+---
 
-Index is created and supported by [Jekyll Themes](https://jekyllthemes.io), and is available for $49.
-
-<a href="https://jekyllthemes.io/theme/index-portfolio-jekyll-theme" class="button button--large">Get This Theme</a>
+Prior to joining Gousto, I completed a PhD in Management Science at the 
+University of Cambridge, [Judge Business School](https://www.jbs.cam.ac.uk/home/), and spent time as a visiting 
+researcher at the [MIT-SUTD International Design Centre](https://idc.sutd.edu.sg)
+in Singapore. I hold a BA in Liberal Arts and Sciences (Maths & Economics) from
+[University College Utrecht](https://www.uu.nl/en/organisation/university-college-utrecht), Utrecht
+University.
