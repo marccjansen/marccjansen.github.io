@@ -20,3 +20,4 @@ is over; welcome to the Age of Code.
 
 ![Photo by Filip Kominik on Unsplash](/images/posts/filip-kominik-IHtVbLRjTZU-unsplash.jpg)
 
+_Photo by Filip Kominik on Unsplash_

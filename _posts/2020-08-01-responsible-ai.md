@@ -28,3 +28,4 @@ playbook or regulations to guide decision making.
 
 ![Photo by Tyler Lastovich on Unsplash](/images/posts/tyler-lastovich-d0Sl3AH8Tlg-unsplash.jpg)
 
+_Photo by Tyler Lastovich on Unsplash_

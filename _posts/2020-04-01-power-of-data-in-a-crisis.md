@@ -20,5 +20,7 @@ your business.
 
 [... continue reading on Medium](https://blog.decoded.com/the-power-of-data-in-a-crisis-3d74ffe86d79)
 
-![Photo by Filip Kominik on Unsplash](/images/posts/alexey-soucho-GHZnqk0VpPU-unsplash.jpg)
+![Photo by Alexey Soucho on Unsplash](/images/posts/alexey-soucho-GHZnqk0VpPU-unsplash.jpg)
+
+_Photo by Alexey Soucho on Unsplash_
 
