@@ -168,8 +168,8 @@ font_settings:
 
 advanced_settings:
   ajax_loading: true
-  analytics_code: ""
-  google_analytics_tracking_id: "UA-175533981-1"
+  analytics_code: "UA-175533981-1"
+#  google_analytics_tracking_id: "UA-175533981-1"
   custom_styles: ""
   header_js: ""
   footer_js: ""
