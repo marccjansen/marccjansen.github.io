@@ -58,6 +58,10 @@
 	{{ site.data.settings.advanced_settings.analytics_code }}
 	{% endif %}
 
+	{% if site.data.settings.advanced_settings.google_analytics_tracking_id %}
+	{% include analytics.html %}
+	{% endif %}
+
 	{% if site.data.settings.advanced_settings.header_js %}
 	<!-- Extra Header JS Code -->
 	{{ site.data.settings.advanced_settings.header_js }}
