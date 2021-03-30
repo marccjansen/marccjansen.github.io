@@ -15,8 +15,9 @@ New York.
 The documentary was released publicly on September 17, 2019. Have a 
 look at the trailer and a snapshot of my role in the documentary below!
 
-<iframe src="https://player.vimeo.com/video/359793237" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-<p><a href="https://vimeo.com/359793237">Data Science Pioneers documentary trailer</a> from <a href="https://vimeo.com/luminante">Luminante</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<iframe src="https://player.vimeo.com/video/352483111?color=73fafc&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+<p><a href="https://vimeo.com/352483111">Data Science Pioneers Trailer</a> from <a href="https://vimeo.com/dataiku">Dataiku</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
 
 <iframe src="https://player.vimeo.com/video/367209615" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 <p><a href="https://vimeo.com/367209615">Data Science Pioneers: introducing Marc Jansen</a> from <a href="https://vimeo.com/dataiku">Dataiku</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
