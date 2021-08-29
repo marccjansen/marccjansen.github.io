@@ -1,6 +1,6 @@
 basic_settings:
   site_title: Marc Jansen
-  site_tagline: Data Scientist
+  site_tagline: Data Scientist <br> & Product Manager
   favicon_image: /images/favicon.png
 
 header_settings:
