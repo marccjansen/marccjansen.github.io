@@ -4,8 +4,9 @@ title: Hi there!
 
 🗽
 ---
-I'm a senior data scientist at [Amazon](https://www.amazon.science), working on 
-data products and optimization within the Seller Fees team.
+I'm a senior data scientist at [Amazon](https://www.amazon.science), based in
+New York City. At Amazon I'm working on data products and optimization within 
+the Seller Fees team. 
 
 Before joining Amazon, I helped build and deliver data skills and digital 
 leadership programs as a product director at [Decoded](https://www.decoded.com).
@@ -17,7 +18,6 @@ Next to my work at Decoded, I was also part of the advisory board for [Battery
 Associates](https://battery.associates). As an advisor, I supported the team at 
 BA in creating a platform for talent development and sourcing in the battery 
 technology landscape.
-
 
 🚀
 ---
@@ -32,7 +32,7 @@ a squad responsible for the company's warehouse optimization algorithms.
 ---
 
 I completed a PhD in Operations Management at the University of Cambridge, [Judge Business School](https://www.jbs.cam.ac.uk/home/),
-and spent time as a visiting researcher at the [MIT-SUTD International Design Centre](https://idc.sutd.edu.sg)
-in Singapore. I hold a BA in Liberal Arts and Sciences (Maths & Economics) from
-[University College Utrecht](https://www.uu.nl/en/organisation/university-college-utrecht), 
+and spent time as a visiting researcher at the MIT-SUTD International Design Centre
+at [SUTD](https://www.sutd.edu.sg) in Singapore. I hold a BA in Liberal Arts and
+Sciences (Maths & Economics) from [University College Utrecht](https://www.uu.nl/en/organisation/university-college-utrecht), 
 Utrecht University.
