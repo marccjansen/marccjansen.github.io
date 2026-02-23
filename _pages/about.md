@@ -4,7 +4,7 @@ title: Hi there!
 
 🗽
 ---
-I'm a senior data scientist at [Amazon](https://www.amazon.science), based in
+I'm a senior research scientist at [Amazon](https://www.amazon.science), based in
 New York City. At Amazon I'm working on data products and optimization within 
 the Seller Fees team. 
 
