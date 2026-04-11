@@ -1,56 +1,35 @@
 ---
 layout: default
 title: Blog
-description: Index includes a simple blog with pagination.
+description: Writing on data, technology, and operations.
 featured_image: /images/social.jpg
 ---
 
 <section class="blog">
 
-	<div class="content-wrap blog-wrap">
+	<div class="wrap blog-wrap">
 
-		{% for post in paginator.posts %}
+		{% assign posts = site.posts %}
+		{% for post in posts %}
 
-		<article class="blog-post">
+		<article class="blog-card">
 
-			<a class="blog-post__link" href="{{ post.url | relative_url }}">
+			<p class="blog-card__date">{{ post.date | date: "%B %-d, %Y" }}</p>
 
-				<div class="blog-post__image">
-					<img src="{{ post.featured_image | relative_url }}" alt="{{ post.title }}">
-				</div>
+			<h2 class="blog-card__title">
+				<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+			</h2>
 
-				<div class="blog-post__content">
-					<div class="blog-post__info">
-						<h2 class="blog-post__title">{{ post.title }}</h2>
-						<p class="blog-post__subtitle">{{ post.date | date_to_long_string }}</p>
-					</div>
-				</div>
-
-			</a>
+			{% if post.description %}
+			<p class="blog-card__excerpt">{{ post.description }}</p>
+			{% endif %}
 
 		</article>
+
+		{% unless forloop.last %}<hr class="blog-divider">{% endunless %}
 
 		{% endfor %}
 
 	</div>
 
 </section>
-
-{% if paginator.total_pages > 1 %}
-
-<section class="pagination">
-
-	{% if paginator.previous_page %}
-	<div class="pagination__prev">
-		<a href="{{ paginator.previous_page_path | relative_url }}" class="button button--large"><i class="fa fa-angle-left" aria-hidden="true"></i> <span>Newer Posts</span></a>
-	</div>
-	{% endif %}
-	{% if paginator.next_page %}
-	<div class="pagination__next">
-		<a href="{{ paginator.next_page_path | relative_url }}" class="button button--large"><span>Older Posts</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-	</div>
-	{% endif %}
-
-</section>
-
-{% endif %}

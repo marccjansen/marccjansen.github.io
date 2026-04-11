@@ -1,7 +1,7 @@
 ---
 title: 'Gousto Operations: the power of combinations'
 date: 2019-05-31 00:00:00
-description: A blog post about the connection between Gousto's business model and optimizing its operations
+description: How the complexity of Gousto's e-commerce and logistics operations creates unique opportunities for efficiency gains through combinatorial optimization.
 featured_image: '/images/posts/marc-jansen-paired-purchase.jpg'
 
 ---

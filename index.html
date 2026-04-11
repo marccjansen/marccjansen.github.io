@@ -1,38 +1,14 @@
 ---
-layout: default
-title: Hello!
-description: Data Scientist in NYC
-featured_image: /images/social.jpg
+layout: none
 ---
-
-
-<section class="portfolio">
-
-	<div class="content-wrap portfolio-wrap">
-
-		{% for post in site.posts %}
-
-		<div class="portfolio-item">
-
-			<a class="portfolio-item__link" href="{{ post.url | relative_url }}">
-
-				<div class="portfolio-item__image">
-					<img src="{{ post.featured_image | relative_url }}" alt="{{ post.title }}">
-				</div>
-
-				<div class="portfolio-item__content">
-					<div class="portfolio-item__info">
-						<h2 class="portfolio-item__title">{{ post.title }}</h2>
-						<p class="portfolio-item__subtitle">{{ post.subtitle }}</p>
-					</div>
-				</div>
-
-			</a>
-
-		</div>
-
-		{% endfor %}
-
-	</div>
-
-</section>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=/about">
+  <link rel="canonical" href="/about">
+</head>
+<body>
+  <script>window.location.replace('/about');</script>
+</body>
+</html>
