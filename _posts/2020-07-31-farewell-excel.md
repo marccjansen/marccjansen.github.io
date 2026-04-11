@@ -1,7 +1,7 @@
 ---
 title: 'At 1,048,576 rows? Time to Bid Excel a Respectful Farewell'
 date: 2020-07-31 00:00:00
-description: A blog post on the tools to supercharge your data skills
+description: Why hitting Excel's row limit is a sign to move on — and which open-source tools make working with data faster, more elegant, and more productive.
 featured_image: '/images/posts/filip-kominik-IHtVbLRjTZU-unsplash.jpg'
 
 ---

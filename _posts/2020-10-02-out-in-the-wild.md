@@ -1,7 +1,7 @@
 ---
 title: 'Out in the Wild: Productionizing your Data Project'
 date: 2020-10-02 00:00:00
-description: A blog post on end-user considerations around productionization of a data project
+description: Only one in ten data science projects makes it to production. Here's what it takes to close that gap and get your model in front of real users.
 featured_image: '/images/posts/charles-lamb-CwUX6SIOQmU-unsplash.jpg'
 
 ---

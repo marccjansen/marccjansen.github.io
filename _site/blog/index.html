@@ -21,17 +21,17 @@
 	<!-- Page Info -->
 	<link rel="shortcut icon" href="/images/favicon.png">
 	<title>Blog – Marc Jansen</title>
-	<meta name="description" content="Index includes a simple blog with pagination.">
+	<meta name="description" content="Writing on data, technology, and operations.">
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Blog – Marc Jansen">
-	<meta name="twitter:description" content="Index includes a simple blog with pagination.">
+	<meta name="twitter:description" content="Writing on data, technology, and operations.">
 	<meta name="twitter:image:src" content="http://localhost:4000/images/social.jpg">
 
 	<!-- Facebook OpenGraph -->
 	<meta property="og:title" content="Blog – Marc Jansen" />
-	<meta property="og:description" content="Index includes a simple blog with pagination." />
+	<meta property="og:description" content="Writing on data, technology, and operations." />
 	<meta property="og:image" content="http://localhost:4000/images/social.jpg" />
 
 	
@@ -59,6 +59,18 @@
 	
 
 	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175533981-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-175533981-1');
+    </script>
+	
+
+	
 	<!-- Extra Header JS Code -->
 	
 	
@@ -74,12 +86,12 @@
 	<div class="header__content">
 
 		
-		<a href="/" class="header__title">
+		<a href="/about" class="header__title">
 			Marc Jansen
 		</a>
 		
 
-		<h1 class="header__tagline">Data Scientist</h1>
+		<h1 class="header__tagline">Data Scientist <br> & Product Manager</h1>
 
 		<div class="menu">
 			<div class="menu__toggle js-menu-toggle">
@@ -197,7 +209,7 @@
 </ul>
 
 			<div class="footer__copyright">
-				<span>© 2020 Marc Jansen</span>
+				<span>© 2026 Marc Jansen</span>
 				<a href="https://jekyllthemes.io" target="_blank">Jekyll Themes</a>
 			</div>
 
@@ -219,77 +231,104 @@
 
 			<section class="blog">
 
-	<div class="content-wrap blog-wrap">
+	<div class="wrap blog-wrap">
+
+		
+		
+
+		<article class="blog-card">
+
+			<p class="blog-card__date">October 1, 2020</p>
+
+			<h2 class="blog-card__title">
+				<a href="/blog/out-in-the-wild">Out in the Wild: Productionizing your Data Project</a>
+			</h2>
+
+			
+			<p class="blog-card__excerpt">Only one in ten data science projects makes it to production. Here's what it takes to close that gap and get your model in front of real users.</p>
+			
+
+		</article>
+
+		<hr class="blog-divider">
 
 		
 
-		<article class="blog-post">
+		<article class="blog-card">
 
-			<a class="blog-post__link" href="/blog/responsible-ai">
+			<p class="blog-card__date">July 31, 2020</p>
 
-				<div class="blog-post__image">
-					<img src="/images/posts/tyler-lastovich-d0Sl3AH8Tlg-unsplash.jpg" alt="Leading Responsible AI: Explainable AI and Data Bias">
-				</div>
+			<h2 class="blog-card__title">
+				<a href="/blog/responsible-ai">Leading Responsible AI: Explainable AI and Data Bias</a>
+			</h2>
 
-				<div class="blog-post__content">
-					<div class="blog-post__info">
-						<h2 class="blog-post__title">Leading Responsible AI: Explainable AI and Data Bias</h2>
-						<p class="blog-post__subtitle">31 July 2020</p>
-					</div>
-				</div>
+			
+			<p class="blog-card__excerpt">What senior leaders need to understand about explainability and data bias as AI becomes embedded in high-stakes business decisions.</p>
+			
 
-			</a>
+		</article>
+
+		<hr class="blog-divider">
+
+		
+
+		<article class="blog-card">
+
+			<p class="blog-card__date">July 30, 2020</p>
+
+			<h2 class="blog-card__title">
+				<a href="/blog/farewell-excel">At 1,048,576 rows? Time to Bid Excel a Respectful Farewell</a>
+			</h2>
+
+			
+			<p class="blog-card__excerpt">Why hitting Excel's row limit is a sign to move on — and which open-source tools make working with data faster, more elegant, and more productive.</p>
+			
+
+		</article>
+
+		<hr class="blog-divider">
+
+		
+
+		<article class="blog-card">
+
+			<p class="blog-card__date">March 31, 2020</p>
+
+			<h2 class="blog-card__title">
+				<a href="/blog/power-of-data-in-a-crisis">The Power of Data in a Crisis</a>
+			</h2>
+
+			
+			<p class="blog-card__excerpt">How a data-driven mindset can help businesses find a foothold and chart a new course when crisis upends their assumptions.</p>
+			
+
+		</article>
+
+		<hr class="blog-divider">
+
+		
+
+		<article class="blog-card">
+
+			<p class="blog-card__date">May 30, 2019</p>
+
+			<h2 class="blog-card__title">
+				<a href="/blog/power-of-combinations">Gousto Operations: the power of combinations</a>
+			</h2>
+
+			
+			<p class="blog-card__excerpt">How the complexity of Gousto's e-commerce and logistics operations creates unique opportunities for efficiency gains through combinatorial optimization.</p>
+			
 
 		</article>
 
 		
-
-		<article class="blog-post">
-
-			<a class="blog-post__link" href="/blog/farewell-excel">
-
-				<div class="blog-post__image">
-					<img src="/images/posts/filip-kominik-IHtVbLRjTZU-unsplash.jpg" alt="At 1,048,576 rows? Time to Bid Excel a Respectful Farewell">
-				</div>
-
-				<div class="blog-post__content">
-					<div class="blog-post__info">
-						<h2 class="blog-post__title">At 1,048,576 rows? Time to Bid Excel a Respectful Farewell</h2>
-						<p class="blog-post__subtitle">30 July 2020</p>
-					</div>
-				</div>
-
-			</a>
-
-		</article>
-
-		
-
-		<article class="blog-post">
-
-			<a class="blog-post__link" href="/blog/power-of-data-in-a-crisis">
-
-				<div class="blog-post__image">
-					<img src="/images/posts/alexey-soucho-GHZnqk0VpPU-unsplash.jpg" alt="The Power of Data in a Crisis">
-				</div>
-
-				<div class="blog-post__content">
-					<div class="blog-post__info">
-						<h2 class="blog-post__title">The Power of Data in a Crisis</h2>
-						<p class="blog-post__subtitle">31 March 2020</p>
-					</div>
-				</div>
-
-			</a>
-
-		</article>
 
 		
 
 	</div>
 
 </section>
-
 
 
 		</div>
@@ -380,7 +419,7 @@
 </ul>
 
 	<div class="footer__copyright">
-		<span>© 2020 Marc Jansen</span>
+		<span>© 2026 Marc Jansen</span>
 		<a href="https://jekyllthemes.io" target="_blank">Jekyll Themes</a>
 	</div>
 

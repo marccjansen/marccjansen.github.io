@@ -1,7 +1,7 @@
 ---
 title: 'Leading Responsible AI: Explainable AI and Data Bias'
 date: 2020-08-01 00:00:00
-description: A blog post on the differences between explainability and bias
+description: What senior leaders need to understand about explainability and data bias as AI becomes embedded in high-stakes business decisions.
 featured_image: '/images/posts/tyler-lastovich-d0Sl3AH8Tlg-unsplash.jpg'
 
 ---

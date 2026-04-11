@@ -1,7 +1,7 @@
 ---
 title: 'The Power of Data in a Crisis'
 date: 2020-04-01 00:00:00
-description: A blog post on the role of data driving innovation during crises
+description: How a data-driven mindset can help businesses find a foothold and chart a new course when crisis upends their assumptions.
 featured_image: '/images/posts/alexey-soucho-GHZnqk0VpPU-unsplash.jpg'
 
 ---
