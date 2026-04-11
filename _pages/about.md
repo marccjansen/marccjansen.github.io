@@ -4,29 +4,16 @@ title: Hi there!
 
 🗽
 ---
-I'm a senior research scientist at [Amazon](https://www.amazon.science), based in
-New York City. At Amazon I'm working on data products and optimization within 
-the Seller Fees team. 
+I'm Head of Research at [Catalyst Investment Partners](https://www.catalystios.com), based in New York City. Catalyst acquires and operates Industrial Outdoor Storage (IOS) assets on behalf of institutional investors.
 
-Before joining Amazon, I helped build and deliver data skills and digital 
-leadership programs as a product director at [Decoded](https://www.decoded.com).
-I worked with senior leadership across global clients in financial services, 
-retail, and government, helping improve their understanding of the data and
-technology landscape.
+Before joining Catalyst, I was a senior research scientist at [Amazon](https://www.amazon.science), where I worked on data products and optimization within the Seller Fees team, and Product Director at [Decoded](https://www.decoded.com), where I worked with senior leadership across global clients in financial services, retail, and government, helping improve their understanding of the data and technology landscape.
 
-Next to my work at Decoded, I was also part of the advisory board for [Battery 
-Associates](https://battery.associates). As an advisor, I supported the team at 
-BA in creating a platform for talent development and sourcing in the battery 
-technology landscape.
+Next to my work at Decoded, I was also part of the advisory board for [Battery Associates](https://battery.associates). As an advisor, I supported the team at  BA in creating a platform for talent development and sourcing in the battery technology landscape.
 
 🚀
 ---
 
-I started my career as a data scientist with [Gousto](https://www.gousto.co.uk)
-in London, UK. Since joining in early 2017, I worked on development and 
-production deployment of algorithms for personalization and inventory management.
-As the third data science hire, I helped grow the team to ten members and led
-a squad responsible for the company's warehouse optimization algorithms. 
+I started my career as a data scientist with [Gousto](https://www.gousto.co.uk) in London, UK, in 2017. As the third data science hire, I helped grow the team to ten members and led a team responsible for the company's warehouse optimization algorithms. 
 
 📖
 ---
