@@ -5,7 +5,10 @@
 // - - - - - - - - - - - - - - - - - -
 
 .blog {
+	margin-top: 0;
 	padding: $grid-spacing * 1.5 $grid-spacing;
+	background: $background-alt-color;
+	min-height: 100vh;
 }
 
 .blog-wrap {
@@ -18,7 +21,7 @@
 
 .blog-card__date {
 	margin: 0 0 8px;
-	font-size: 0.8em;
+	font-size: 1.0em;
 	font-family: $body-font;
 	font-weight: $regular-weight;
 	letter-spacing: 0.05em;
@@ -28,10 +31,10 @@
 
 .blog-card__title {
 	margin: 0 0 10px;
-	font-size: $h3-small;
+	font-size: $h4-small;
 
 	@include mq(tabletp) {
-		font-size: $h3-medium;
+		font-size: $h4-medium;
 	}
 
 	a {
@@ -46,7 +49,7 @@
 
 .blog-card__excerpt {
 	margin: 0;
-	font-size: 0.95em;
+	font-size: 0.85em;
 	line-height: 1.65;
 	color: $text-medium-color;
 }
