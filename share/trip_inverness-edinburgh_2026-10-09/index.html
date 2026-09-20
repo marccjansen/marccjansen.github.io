@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inverness–Edinburgh Roadtrip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F2F5F1; --surface:#FFFFFF; --ink:#17231D; --muted:#56655D; --line:#D6DDD7;
+  --sea:#D9E6EC; --land:#F9FAF6; --coast:#8EA7B1; --seaink:#54737F;
+  --d1:#0E7C6B; --on-d1:#FFFFFF; --d2:#A65409; --on-d2:#FFFFFF; --ov:#7A3E9D; --on-ov:#FFFFFF;
+  --link:#0B6A5C; --hl:#FFF3C4;
+  --warn-bg:#FFF4E0; --warn-line:#E2B45A; --warn-ink:#5B3A00;
+  --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --f-body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --f-mono:'DM Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1512; --surface:#171F1B; --ink:#E6EEE9; --muted:#9DAEA4; --line:#2A352F;
+    --sea:#14232B; --land:#1B2520; --coast:#4A6470; --seaink:#7FA0AD;
+    --d1:#3DC2AA; --on-d1:#06201A; --d2:#EBA24B; --on-d2:#2B1600; --ov:#C595E4; --on-ov:#26102F;
+    --link:#6FD8C3; --hl:#3A3312;
+    --warn-bg:#2B2210; --warn-line:#6E551C; --warn-ink:#F2D9A0;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1512; --surface:#171F1B; --ink:#E6EEE9; --muted:#9DAEA4; --line:#2A352F;
+  --sea:#14232B; --land:#1B2520; --coast:#4A6470; --seaink:#7FA0AD;
+  --d1:#3DC2AA; --on-d1:#06201A; --d2:#EBA24B; --on-d2:#2B1600; --ov:#C595E4; --on-ov:#26102F;
+  --link:#6FD8C3; --hl:#3A3312;
+  --warn-bg:#2B2210; --warn-line:#6E551C; --warn-ink:#F2D9A0;
+}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--ground);color:var(--ink);font:15px/1.5 var(--f-body);-webkit-text-size-adjust:100%}
+a{color:var(--link);text-underline-offset:2px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+button{font:inherit;color:inherit}
+.page{max-width:1320px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:22px 56px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;justify-content:space-between;padding-bottom:18px}
+.kicker{margin:0 0 6px;font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{margin:0;font:700 clamp(2rem,4.4vw,3rem)/1.02 var(--f-display);letter-spacing:-.025em;text-wrap:balance}
+.sub{margin:8px 0 0;color:var(--muted);max-width:62ch;text-wrap:pretty}
+.tools{display:flex;gap:10px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{appearance:none;border:0;background:transparent;padding:7px 13px;font:500 13px/1 var(--f-mono);letter-spacing:.04em;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.seg button:focus-visible,.printbtn:focus-visible,.chip:focus-visible,.mk:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.printbtn{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 13px;font:500 13px/1 var(--f-mono);cursor:pointer}
+
+/* glance */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border-block:1px solid var(--line);margin-bottom:26px}
+.glance>div{padding:14px 16px 14px 0}
+.glance>div+div{padding-left:16px;border-left:1px solid var(--line)}
+.glance .lbl{display:flex;align-items:center;gap:8px;font:500 12px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.glance .val{margin-top:8px;font:500 16px/1.25 var(--f-mono);font-variant-numeric:tabular-nums}
+.glance .val small{display:block;margin-top:3px;font:400 12.5px/1.35 var(--f-body);color:var(--muted)}
+
+/* layout */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,430px);gap:0 36px;align-items:start}
+.mapcol{grid-column:2;grid-row:1}
+.content{grid-column:1;grid-row:1;min-width:0}
+.mapwrap{position:sticky;top:calc(env(safe-area-inset-top,0px) + 14px)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font:500 13px/1 var(--f-body);cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.mapsvg{display:block;margin-inline:auto;height:min(76vh,760px);width:auto;max-width:100%;border:1px solid var(--line);border-radius:6px;background:var(--sea)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.mapnote{margin:8px 0 0;font-size:12px;color:var(--muted)}
+
+/* map svg */
+.sea{fill:var(--sea)} .land{fill:var(--land);stroke:var(--coast);stroke-width:1;stroke-linejoin:round}
+.ness{fill:none;stroke:var(--sea);stroke-width:4;stroke-linecap:round}
+.seaTxt{font:italic 500 13px var(--f-body);fill:var(--seaink);letter-spacing:.04em}
+.regTxt{font:500 11px var(--f-mono);fill:var(--coast);letter-spacing:.22em}
+.lbl2{font:600 14.5px var(--f-body);fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:4.5px;stroke-linejoin:round}
+.lbl2.opt{font-weight:500;fill:var(--muted)}
+.lbl2.big{font:700 16px var(--f-display)}
+.casing{fill:none;stroke:var(--land);stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+.seg-d1,.seg-d2{fill:none;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke-width .15s,opacity .15s}
+.seg-d1{stroke:var(--d1)} .seg-d2{stroke:var(--d2)}
+.seg-sp{fill:none;stroke:var(--ov);stroke-width:3;stroke-linecap:round;stroke-dasharray:7 6;transition:stroke-width .15s,opacity .15s}
+.seg-hit{fill:none;stroke:transparent;stroke-width:16;cursor:pointer}
+.sel-on .seg-d1,.sel-on .seg-d2,.sel-on .seg-sp{opacity:.4}
+.sel-on .seg-d1.hi,.sel-on .seg-d2.hi{opacity:1;stroke-width:7}
+.sel-on .seg-sp.hi{opacity:1;stroke-width:5}
+.mk{cursor:pointer}
+.mk .shape-d1{fill:var(--d1)} .mk .shape-d2{fill:var(--d2)} .mk .shape-ov{fill:var(--ov)}
+.mk .ring{fill:none;stroke:var(--land);stroke-width:2.5}
+.mk .num{font:500 13px var(--f-mono);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.mk .num.d1{fill:var(--on-d1)} .mk .num.d2{fill:var(--on-d2)} .mk .num.ov{fill:var(--on-ov)}
+.mk .opt-shape{fill:var(--land);stroke:var(--muted);stroke-width:2;stroke-dasharray:3 2}
+.mk .end{fill:var(--land);stroke:var(--ink);stroke-width:3.5}
+.sel-on .mk{opacity:.5}
+.sel-on .mk.hi{opacity:1}
+.mk.hi .halo{opacity:1}
+.mk .halo{fill:none;stroke:var(--ink);stroke-width:2;opacity:0}
+.layer{transition:opacity .2s}
+svg[data-view="d1"] .layer.d2, svg[data-view="d1"] .layer.ov,
+svg[data-view="d2"] .layer.d1, svg[data-view="d2"] .layer.ov,
+svg[data-view="ov"] .layer.d1, svg[data-view="ov"] .layer.d2{opacity:.12}
+.scale line{stroke:var(--ink);stroke-width:2}
+.scale text,.north text{font:500 11px var(--f-mono);fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:3px}
+.north path{fill:var(--ink)}
+
+/* shape keys */
+.k{display:inline-block;width:14px;height:14px;flex:none}
+.k.d1{background:var(--d1);border-radius:50%}
+.k.d2{background:var(--d2);border-radius:3px}
+.k.ov{width:11px;height:11px;background:var(--ov);transform:rotate(45deg);margin:1.5px}
+.k.opt{border:2px dashed var(--muted);border-radius:50%;width:13px;height:13px}
+.k.end{border:3px solid var(--ink);border-radius:50%}
+.k.sp{width:22px;height:0;border-top:3px dashed var(--ov);margin-block:5.5px}
+
+/* type markers */
+.ty{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border:1px solid var(--line);border-radius:5px;color:var(--ink);background:var(--surface);vertical-align:-5px;margin-left:5px}
+.ty svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tys{white-space:nowrap}
+.tylegend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 6px;font-size:13px;color:var(--muted)}
+.tylegend span{display:inline-flex;align-items:center;gap:7px}
+.tylegend .ty{margin:0}
+ul.themes{list-style:none;margin:0 0 4px;padding:0;display:grid;gap:0}
+ul.themes li{display:grid;grid-template-columns:auto 130px 1fr;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+ul.themes .ty{margin:0;vertical-align:baseline}
+ul.themes b{font:600 14px/1.3 var(--f-body)}
+
+/* sections */
+h2{display:flex;align-items:center;gap:10px;margin:34px 0 12px;font:700 clamp(1.25rem,2.4vw,1.6rem)/1.15 var(--f-display);letter-spacing:-.015em;text-wrap:balance}
+h2:first-child{margin-top:0}
+.sect-note{margin:-4px 0 12px;color:var(--muted);font-size:14px}
+.warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-ink);border-radius:8px;padding:12px 16px;margin:0 0 6px}
+.warn h3{margin:0 0 6px;font:600 13px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
+.warn ul{margin:0;padding-left:18px}
+.warn li{margin:4px 0}
+.warn a{color:inherit}
+
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{text-align:left;padding:8px 12px 8px 0;font:500 11.5px/1.2 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);border-bottom:1.5px solid var(--ink)}
+tbody td{padding:14px 14px 14px 0;vertical-align:top;border-bottom:1px solid var(--line)}
+tbody tr.row{cursor:pointer;transition:background .15s}
+tbody tr.row.sel{background:var(--hl)}
+td.c-seg{width:20%}
+td.c-dist{width:12%;white-space:nowrap}
+.from{font-weight:600;line-height:1.3}
+.via{margin-top:3px;font-size:12.5px;color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:13px}
+.muted{color:var(--muted)}
+ul.items{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ul.items li{display:grid;grid-template-columns:auto 1fr;gap:9px;align-items:start}
+ul.items.noicon li{grid-template-columns:1fr}
+.note{display:block;font-size:13px;color:var(--muted);line-height:1.4;margin-top:2px}
+.bdg{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;font:500 12px/1 var(--f-mono);flex:none;margin-top:1px}
+.bdg.d1{background:var(--d1);color:var(--on-d1);border-radius:50%}
+.bdg.d2{background:var(--d2);color:var(--on-d2);border-radius:5px}
+.bdg.opt{border:2px dashed var(--muted);border-radius:50%;color:var(--muted);width:20px;height:20px;margin:2px 1px}
+
+.hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 28px}
+.hotel{padding:14px 0;border-bottom:1px solid var(--line)}
+.hname{font:600 16px/1.25 var(--f-display)}
+.hnote{margin-top:4px;font-size:13.5px;color:var(--muted);line-height:1.45}
+.hlinks{margin-top:7px;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13.5px}
+.hlinks a.book{font-weight:600}
+.hotels-in{display:grid;gap:10px}
+.hotels-in .hotel{padding:0 0 10px;border-bottom:1px dashed var(--line)}
+.hotels-in .hotel:last-child{border-bottom:0;padding-bottom:0}
+td.c-town{width:22%}
+.town{font:700 17px/1.2 var(--f-display)}
+.tag{display:inline-block;margin-top:6px;padding:2px 8px;border-radius:999px;background:var(--ink);color:var(--ground);font:500 11px/1.5 var(--f-mono);letter-spacing:.04em}
+.budget{margin:10px 0 0;padding:10px 14px;border-left:3px solid var(--line);color:var(--muted);font-size:13.5px}
+.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.foot p{margin:4px 0}
+
+/* narrow */
+@media (max-width:980px){
+  .layout{display:block}
+  .mapwrap{position:static}
+  .mapsvg{height:auto;width:100%;max-width:520px;aspect-ratio:541/900}
+  .mapcol{margin-bottom:28px}
+}
+@media (max-width:720px){
+  .glance>div,.glance>div+div{padding:12px 0;border-left:0}
+  .glance>div+div{border-top:1px solid var(--line)}
+  table,thead,tbody,tr,td{display:block}
+  thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  tbody tr{padding:14px 0;border-bottom:1px solid var(--line)}
+  tbody td{border:0;padding:5px 0;width:auto!important;white-space:normal!important}
+  tbody td[data-label]::before{content:attr(data-label);display:block;margin-bottom:3px;font:500 11px/1.2 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  td.c-seg::before{display:none!important}
+  ul.themes li{grid-template-columns:auto 1fr}
+  ul.themes li>span:last-child{grid-column:1 / -1}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* print */
+@page{size:A4;margin:12mm}
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --ground:#fff; --surface:#fff; --ink:#111; --muted:#4a4f4c; --line:#c9cfca;
+    --sea:#D9E6EC; --land:#F9FAF6; --coast:#8EA7B1; --seaink:#54737F;
+    --d1:#0E7C6B; --on-d1:#fff; --d2:#A65409; --on-d2:#fff; --ov:#7A3E9D; --on-ov:#fff;
+    --link:#0B4F45; --hl:#fff; --warn-bg:#fff4e0; --warn-line:#e2b45a; --warn-ink:#4a3000;
+  }
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#fff}
+  body{font-size:10pt}
+  .page{max-width:none;padding:0}
+  .tools,.filters,.printbtn,.mapnote{display:none!important}
+  .layout{display:block}
+  .mapcol{break-after:page;page-break-after:always;margin:0}
+  .mapwrap{position:static}
+  .mapsvg{height:158mm;width:auto;margin:0 auto}
+  svg[data-view] .layer{opacity:1!important}
+  .sel-on .seg-d1,.sel-on .seg-d2,.sel-on .seg-sp,.sel-on .mk{opacity:1!important}
+  h1{font-size:26pt}
+  h2{break-after:avoid;page-break-after:avoid;margin-top:18px}
+  tr,li,.hotel,.warn{break-inside:avoid;page-break-inside:avoid}
+  tbody tr.row.sel{background:none}
+  thead{display:table-header-group}
+  a{color:var(--link)}
+  table{font-size:9.5pt}
+  .glance{margin-bottom:12px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <div>
+      <p class="kicker" id="kicker"></p>
+      <h1 id="h1">Inverness → Edinburgh</h1>
+      <p class="sub" id="sub"></p>
+    </div>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Taal / Language">
+        <button type="button" id="lang-nl" aria-pressed="true">NL</button>
+        <button type="button" id="lang-en" aria-pressed="false">EN</button>
+      </div>
+      <button type="button" class="printbtn" id="printbtn" hidden></button>
+    </div>
+  </header>
+  <section class="glance" id="glance"></section>
+  <div class="layout">
+    <aside class="mapcol">
+      <div class="mapwrap">
+        <div class="filters" id="filters" role="group"></div>
+        <svg id="map" class="mapsvg" role="img" viewBox="0 0 541 900" data-view="all" aria-label="Kaart"></svg>
+        <div class="legend" id="legend"></div>
+        <p class="mapnote" id="mapnote"></p>
+      </div>
+    </aside>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+<script>
+const STANDALONE = /*STANDALONE*/true;
+const GEO = {"W":541,"H":900,"coast":"M39.7,920L38.1,915.1L37.2,911.3L35.3,906.8L34.4,887.8L34.4,887.1L32.6,874.9L34.4,862.8L38.1,855.2L43.5,849.9L51.7,846.9L56.2,845.4L59.8,846.1L76.1,853.7L79.8,854.5L83.4,852.9L88.8,856.7L130.5,862.8L136.9,859L108.8,852.9L98.8,850.7L87.9,843.8L75.2,827.1L65.3,823.3L60.7,818.8L56.2,812.7L53.5,806.6L50.8,793.6L49.8,791.3L46.2,790.6L45.3,793.6L45.3,798.2L47.1,803.5L58.9,821.8L61.6,830.2L59.8,834L55.3,834.7L48.9,834.7L43.5,831.7L40.8,825.6L39.9,817.2L39.9,800.5L39.9,796.7L49.8,770.8L68,741.8L68.9,734.9L68,733.4L65.3,735.6L61.6,740.2L47.1,770.8L43.5,776.1L38.1,776.1L36.3,772.3L36.3,758.6L35.3,752.5L32.6,747.9L29,746.3L26.3,750.9L29,759.3L32.6,774.6L34.4,790.6L33.5,797.4L30.8,799L29.9,802L30.8,811.1L30.8,820.3L31.7,826.4L32.6,830.9L29.9,833.2L25.4,831.7L21.7,829.4L17.2,827.9L17.2,830.9L20.8,832.4L23.6,834.7L26.3,838.5L28.1,843.8L27.2,849.9L24.5,854.5L21.7,858.3L19,862.1L18.1,867.4L17.2,871.9L16.3,875.7L13.6,880.3L10,884.8L7.2,884.8L-0.9,883.3L-4.5,878.7L-8.2,866.6L-10.9,854.5L-11.8,845.4L-20,834.1L-20,758.6L-20,758.6L-19.9,758.6L-18.1,755.5L-9.1,734.9L-4.5,728.8L2.7,724.2L12.7,719.6L20.8,712.7L26.3,701.2L21.7,704.3L12.7,714.2L8.2,716.5L-1.8,717.3L-6.3,719.6L-10,723.4L-12.7,728.8L-19,744.8L-20,745.9L-20,588.3L-20,588.3L-15.4,577.5L-10,570.6L-15.4,573.6L-19,579.8L-20,582.8L-20,510.7L-20,510.7L-17.2,508.7L2.7,504.1L7.2,501L-20,507L-20,-20L-13.3,-20L-11.8,-18.9L-12.6,-20L216.6,-20L216.6,-20L220.2,-17.3L223.9,-18.1L223.6,-20L230.6,-20L230.6,-20L239.3,-14.1L247.4,-11.7L257.5,-20L271.1,-20L271.1,-20L274.6,-15.7L271,-9.3L279.2,-6.9L288.2,-11.7L297.3,-19.7L297.5,-20L311.8,-20L311.8,-20L310.9,-18.1L276.4,27.4L271,32.2L263.7,42.5L261,45.7L255.6,46.5L252,44.9L250.2,40.1L253.8,33L246.5,25.8L238.4,29.8L218.4,47.3L215.7,48.9L209.4,48.9L192.1,53.6L187.6,52.8L184,52.8L181.3,58.4L180.4,64.8L175.8,67.9L172.2,69.5L155.9,86.2L154.1,89.4L152.3,94.1L149.5,101.3L151.4,102.1L155,98.9L162.2,95.7L165.9,91.8L169.5,87L172.2,83L174.9,78.3L186.7,71.1L195.8,60.8L206.6,55.2L209.4,55.2L212.1,56.8L214.8,60.8L227.5,64L233.8,63.2L237.5,60L240.2,56.8L252,49.7L255.6,48.9L256.5,55.2L251.1,64.8L243.8,74.3L236.6,79.9L227.5,94.1L228.4,96.5L229.3,98.1L230.2,99.7L231.1,100.5L219.3,101.3L214.8,104.4L210.3,110L213,114.8L211.2,114.8L205.7,113.2L191.2,113.2L191.2,117.1L198.5,116.3L202.1,117.1L205.7,119.5L201.2,130.6L197.6,135.3L194.9,138.5L203.9,141.7L208.5,141.7L213.9,138.5L218.4,133.8L220.2,130.6L220.2,129L225.7,129L228.4,127.4L232.9,120.3L236.6,117.1L241.1,114L244.7,113.2L249.2,110.8L245.6,106L236.6,97.3L243.8,98.1L266.5,94.1L290.9,96.5L299.1,94.1L337.2,65.6L352.6,61.6L349.9,67.1L348.9,68.7L347.1,71.1L349.9,74.3L353.5,73.5L357.1,71.9L360.7,71.1L355.3,58.4L365.3,62.4L369.8,62.4L374.3,61.6L378,59.2L382.5,53.6L384.3,48.1L383.4,42.5L386.1,37.7L387.9,36.9L390.6,38.5L393.4,39.3L397,37.7L403.3,33.7L407,33L437.8,33.7L456.8,46.5L489.4,58.4L500.3,58.4L511.2,55.2L526.6,44.1L530.2,42.5L561,42.5L561,612.3L561,612.3L554.7,612.9L495.8,622.2L494,622.2L484.9,626.8L475.8,632.9L449.6,660.6L438.7,664.4L427.8,661.4L431.4,665.2L436,666.7L445.9,666.7L451.4,665.2L462.2,659.1L472.2,656.8L522.1,631.4L524.8,628.3L526.6,623.7L532,619.9L538.4,619.1L542.9,622.2L547.4,626.8L556.5,626.8L559.2,632.9L559.2,641.4L557.4,649.8L554.7,656.8L550.2,661.4L556.5,661.4L557.4,662.1L558.3,669L559.2,670.6L561,671.1L561,741L561,741L558.3,741.8L552,740.2L536.6,732.6L524.8,731.8L518.4,734.1L515.7,737.2L513.9,741L500.3,750.9L486.7,767L482.2,769.2L477.7,771.5L474.9,776.1L471.3,791.3L468.6,797.4L465,800.5L446.8,801.2L442.3,803.5L433.2,809.6L423.3,814.2L413.3,815.7L403.3,815.7L362.5,803.5L340.8,803.5L330.8,800.5L321.8,794.4L321.8,793.6L312.7,785.3L307.3,778.4L303.6,776.1L299.1,776.1L299.1,778.4L313.6,789.1L316.3,792.9L318.1,793.6L326.3,809.6L328.1,812.7L329.9,813.4L335.4,812.7L336.3,812.7L338.1,814.9L339.9,818L341.7,821L344.4,821.8L358.9,818.8L364.4,818.8L407.9,830.9L419.6,830.9L423.3,829.4L426,829.4L428.7,833.2L433.2,837L478.6,840L480.4,841.6L484.9,848.4L486.7,849.9L489.4,850.7L505.8,849.1L524.8,840L530.2,835.5L534.8,828.6L539.3,822.6L545.6,821.8L543.8,816.5L542.9,814.2L542,812.7L546.5,808.9L553.8,799.7L559.2,797.4L561,797.6L561,920ZM-20,846L-15.4,857.5L-13.6,866.6L-15.4,871.2L-20,869.9L-20,846ZM-20,877.7L-18.1,878.7L-16.3,879.5L-14.5,881L-12.7,890.9L-10.9,893.1L-9.1,893.9L-6.3,896.2L-3.6,902.2L-0.9,907.5L0.9,913.6L1.7,920L-20,920Z","pts":{"inv":[201.2,148.1],"cul":[239.2,148.2],"elg":[431.1,67.1],"crai":[464.2,143],"ball":[420.4,183.1],"avi":[301.7,280],"gra":[357,216.9],"kin":[244.4,334.3],"pit":[324,507.4],"ruth":[249.7,338.9],"bruar":[269.6,466.8],"blair":[295.4,478.5],"herm":[356.8,568.3],"scone":[404.8,637.4],"qf":[409.3,830.6],"edi":[462.1,847.6],"loch":[302.3,298.5],"roth":[455.9,128.1],"fort":[250.2,556.6],"lochl":[411.6,735]},"segs":{"s1":"M201.2 148.1L215 147.5L227.6 146.6L239.2 148.2","s2":"M239.2 148.2L246.4 137.7L247.7 118L290.3 97L353.7 86.6L429.1 67.3L431.1 67.1","s3":"M431.1 67.1L435.3 86.1L449.1 109.6L456.6 128.5L464.2 143","s4":"M464.2 143L451.5 151.4L436.5 165.8L420.4 183.1L403.8 198.5L386.2 212.5L357 216.9","s4b":"M357 216.9L341.4 222.8L325.7 238.2L308.1 254.5L302.3 259.1L301.7 280","s5":"M301.7 280L259.2 313.4L247.7 328.8L249.7 338.9","s6":"M249.7 338.9L240.1 338L228.1 343.1L196.1 399.5L194.8 425.8L212.4 448.8L232.6 462.6L245.2 465.8L269.6 466.8L288 476.9L295.4 478.5","s7":"M295.4 478.5L313.9 491.6L324 507.4L341.9 528.7L356.8 568.3","s8":"M356.8 568.3L361.7 574L391.2 611.4L395 627.4L404.8 637.4","s9a":"M404.8 637.4L401.1 647.8L406.3 670.6L402.5 733.1L411.6 735","s9b":"M411.6 735L402.5 733.1L403.8 790.5L408.3 826.2L409.3 830.6L418.9 835.6L446.6 842.3L462.1 847.6","sf":"M341.9 528.7L320.7 536.9L291.8 545.2L268.8 549.3L250.2 556.6"},"ness":"M183.5 170.5L172.2 189.2L147 220L109.2 254.5L86.6 291.6L86.6 303.3","scalePx":166.6,"labels":{"moray":[320.7,27.2],"forth":[489.4,799.6],"speyside":[421.4,235.8],"cairngorms":[353.4,356.5],"perthshire":[152,499.4],"fife":[504.5,718.2],"ness":[124.3,235.8]}};
+
+/* ---------- helpers ---------- */
+const I = (nl, en) => ({ nl, en });
+const GM = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+const BKS = q => 'https://www.booking.com/searchresults.html?ss=' + encodeURIComponent(q) + '&nflt=' + encodeURIComponent('review_score=80') + '&order=review_score_and_price';
+const BK = q => 'https://www.booking.com/searchresults.html?ss=' + encodeURIComponent(q);
+const A = (name, url, cls) => `<a href="${url}" target="_blank" rel="noopener noreferrer"${cls ? ` class="${cls}"` : ''}>${name}</a>`;
+const LS = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+};
+
+/* ---------- type markers (small icons) ---------- */
+const TYPES = {
+  whisky: { nl:'Whisky-proeverij', en:'Whisky tasting', p:'<path d="M3.2 3h9.6l-1 9.4a1 1 0 0 1-1 .9H5.2a1 1 0 0 1-1-.9z"/><path d="M4 7.2h8"/>' },
+  hike:   { nl:'Wandeling', en:'Hike', p:'<path d="M1.5 13.5 6 5.2l2.7 4.8 1.6-2.6 4.2 6.1z"/>' },
+  pub:    { nl:'Pubmaaltijd', en:'Pub meal', p:'<path d="M3 4h7v8.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M10 6h1.6a1.5 1.5 0 0 1 0 3.5H10"/><path d="M4.6 7.2h3.8"/>' },
+  castle: { nl:'Kasteel / ruïne', en:'Castle / ruin', p:'<path d="M3 13.5V5h2v1.6h1.6V5h2.8v1.6H11V5h2v8.5z"/><path d="M6.9 13.5v-2.2a1.1 1.1 0 0 1 2.2 0v2.2"/>' },
+  loch:   { nl:'Loch (meer)', en:'Loch (lake)', p:'<path d="M1.5 6.2q1.6-1.7 3.2 0t3.2 0t3.2 0t3.2 0"/><path d="M1.5 10.6q1.6-1.7 3.2 0t3.2 0t3.2 0t3.2 0"/>' },
+};
+let lang = 'nl';
+const tyIcon = t => `<span class="ty" role="img" aria-label="${TYPES[t][lang]}" title="${TYPES[t][lang]}"><svg viewBox="0 0 16 16" aria-hidden="true">${TYPES[t].p}</svg></span>`;
+const tysHTML = list => (list && list.length) ? `<span class="tys">${list.map(tyIcon).join('')}</span>` : '';
+
+/* ---------- UI strings ---------- */
+const UI = {
+  nl: {
+    kicker:'Roadtrip · donderdag t/m zondag', sub:'Inverness en Edinburgh houden we open. Ertussen: een middag Speyside op vrijdag, een dag A9 op zaterdag.',
+    print:'Print', glance:'Overzicht',
+    gThu:'Do · Inverness', gThuV:'Aankomst', gThuS:'Hotel in Inverness',
+    gFri:'Vr · Inverness → Grantown', gSat:'Za · Grantown → Edinburgh', gTot:'Totaal rijden',
+    gSun:'Zo · Edinburgh', gSunV:'Vrij', gSunS:'Daarna de vlucht naar Amsterdam',
+    friS:'Inverness zelf in de ochtend', satS:'aankomst Edinburgh in de avond',
+    h:'u', min:'min', drive:'rijden',
+    filt:{all:'Alles', d1:'Vrijdag', ov:'Overnachten', d2:'Zaterdag'}, filtLabel:'Kaartlaag',
+    leg:{d1:'Vr · hoogtepunt', d2:'Za · hoogtepunt', ov:'Overnachtingsoptie', sp:'Buiten de route', opt:'Optioneel', end:'Begin / einde'},
+    mapNote:'Klik op een nummer of route op de kaart, of op een rij in de tabel, om beide te koppelen.',
+    scale:'25 mi · 40 km', mapLabel:'Kaart van de route Inverness–Edinburgh met hoogtepunten en overnachtingsopties',
+    th:{seg:'Traject', dist:'Afstand · tijd', hl:'Hoogtepunten', eat:'Eten & drinken', town:'Plaats', why:'Karakter & effect op de reis', hotels:'Hotels'},
+    startH:'Donderdagnacht · hotels in Inverness', d1H:'Vrijdagmiddag · Inverness → Grantown-on-Spey', ovH:'Overnachten (vrijdag)', d2H:'Zaterdag · Grantown → Edinburgh', endH:'Zaterdagavond en zondag · hotels in Edinburgh',
+    themesH:'Wat past waar',
+    startSub:'De vrijdagochtend in Inverness laten we bewust open. Parkeren: vooraf bij het hotel navragen.',
+    ovSub:'Restijden gerekend vanaf het traject hierboven en hieronder. De optie buiten de route staat als gestreepte lijn op de kaart. Elke Booking.com-link zoekt het dorp met filter score 8+, gesorteerd op beoordeling: kies 8,5 of hoger, en liever karakter (guesthouse, inn, landhuis) dan faciliteiten.',
+    endSub:'Zondag heb je Edinburgh vrij, daarna de vlucht naar Amsterdam. Autoteruggave en parkeren: nog uit te zoeken; check de openingstijden van het verhuurkantoor op zaterdagavond en zondag.',
+    warnH:'Let op: vrijdag, zaterdag en de datum',
+    booking:'Booking.com', map:'Kaart', site:'Website', bookSearch:'Booking.com (zoeken)',
+    stop:'Stop', opt:'Optioneel',
+    footChecked:'Openingstijden en prijzen zijn gecontroleerd op 20 september 2026 waar ze zijn vermeld; “niet gecontroleerd” betekent dat ik ze niet heb opgezocht. Afstanden en rijtijden zijn schattingen.',
+    footLinks:'Links naar Booking.com openen de hotelpagina (of een zoekpagina); kies daar zelf de data. “Kaart” opent Google Maps.',
+  },
+  en: {
+    kicker:'Road trip · Thursday to Sunday', sub:'Inverness and Edinburgh stay open. In between: an afternoon of Speyside on Friday, a day on the A9 on Saturday.',
+    print:'Print', glance:'Overview',
+    gThu:'Thu · Inverness', gThuV:'Arrive', gThuS:'Hotel in Inverness',
+    gFri:'Fri · Inverness → Grantown', gSat:'Sat · Grantown → Edinburgh', gTot:'Total driving',
+    gSun:'Sun · Edinburgh', gSunV:'Free', gSunS:'Then the flight to Amsterdam',
+    friS:'Inverness itself in the morning', satS:'arrive Edinburgh in the evening',
+    h:'h', min:'min', drive:'driving',
+    filt:{all:'All', d1:'Friday', ov:'Overnight', d2:'Saturday'}, filtLabel:'Map layer',
+    leg:{d1:'Fri · highlight', d2:'Sat · highlight', ov:'Overnight option', sp:'Off-route', opt:'Optional', end:'Start / end'},
+    mapNote:'Click a number or route on the map, or a row in the table, to link the two.',
+    scale:'25 mi · 40 km', mapLabel:'Map of the Inverness–Edinburgh route with highlights and overnight options',
+    th:{seg:'Section', dist:'Distance · time', hl:'Highlights', eat:'Food & drink', town:'Town', why:'Character & effect on the trip', hotels:'Hotels'},
+    startH:'Thursday night · hotels in Inverness', d1H:'Friday afternoon · Inverness → Grantown-on-Spey', ovH:'Overnight (Friday)', d2H:'Saturday · Grantown → Edinburgh', endH:'Saturday evening and Sunday · hotels in Edinburgh',
+    themesH:'What fits where',
+    startSub:'We leave Friday morning in Inverness open on purpose. Parking: ask the hotel in advance.',
+    ovSub:'Times are counted from the sections above and below. The off-route option is the dashed line on the map. Each Booking.com link searches the village with a score 8+ filter, sorted by review score: pick 8.5 or higher, and character (guest house, inn, country house) over facilities.',
+    endSub:'Sunday is free in Edinburgh, then the flight to Amsterdam. Car return and parking: still to sort out; check the rental office hours on Saturday evening and Sunday.',
+    warnH:'Watch out: Friday, Saturday and the dates',
+    booking:'Booking.com', map:'Map', site:'Website', bookSearch:'Booking.com (search)',
+    stop:'Stop', opt:'Optional',
+    footChecked:'Opening hours and prices were checked on 20 September 2026 where stated; “not checked” means I did not look them up. Distances and driving times are estimates.',
+    footLinks:'Booking.com links open the hotel page (or a search page); pick your dates there. “Map” opens Google Maps.',
+  }
+};
+
+/* ---------- content ---------- */
+const DAY1 = [
+  { segs:['s1'], from:I('Inverness → Culloden','Inverness → Culloden'), via:I('B9006','B9006'), mi:5, km:8, min:15,
+    stops:[
+      { n:1, id:'cul', name:'Culloden Battlefield', url:'https://www.nts.org.uk/visit/places/culloden',
+        note:I('Slagveld van de Jacobitische nederlaag in 1746. Reken op 1–1,5 uur. Open 9:00–17:00, laatste toegang 16:30, £12,50. Ook te combineren met je Inverness-ochtend (± 15 min uit het centrum).','Site of the 1746 Jacobite defeat. Allow 1–1.5 h. Open 9:00–17:00, last entry 16:30, £12.50 adult. Can also be part of your Inverness morning (about 15 min from the centre).') },
+      { opt:true, name:'Clava Cairns', url:'https://www.historicenvironment.scot/visit-a-place/places/clava-cairns/',
+        note:I('4.000 jaar oude grafcairns en staande stenen, 30 min. Het hele jaar open.','4,000-year-old burial cairns and standing stones, 30 min. Open year-round.') } ],
+    eat:[ { name:I('Café bij Culloden','Culloden café'), url:'https://www.nts.org.uk/visit/places/culloden/highlights/caf%C3%A9',
+      note:I('Warme maaltijden 11:30–14:30, plus afhaalbalie en koffiekar.','Hot meals 11:30–14:30, plus grab-and-go and a coffee trailer.') } ] },
+  { segs:['s2'], from:I('Culloden → Elgin','Culloden → Elgin'), via:I('A96 via Nairn en Forres','A96 via Nairn and Forres'), mi:35, km:56, min:50,
+    stops:[
+      { n:2, id:'elg', ty:['castle'], name:'Elgin Cathedral', url:'https://www.historicenvironment.scot/visit-a-place/places/elgin-cathedral/',
+        note:I('Middeleeuwse ruïne, de “Lantern of the North”, ca. 45 min. Dagelijks vanaf 10:00; laatste toegang 16:30 (t/m 30 sep), daarna 15:00.','Ruined medieval cathedral, the “Lantern of the North”, about 45 min. Daily from 10:00; last entry 16:30 (to 30 Sep), then 15:00.') },
+      { opt:true, ty:['whisky'], name:'Benromach Distillery (Forres)', url:'https://www.benromach.com/',
+        note:I('Aan de A96. Tasting 30 min £20–25, rondleiding vanaf £25 (1 u). Ma–za 9:30–17:00, minimaal 48 uur vooraf boeken, 18+. Liever niet vlak vóór een rit als je zelf rijdt.','On the A96. Tasting 30 min £20–25, tours from £25 (1 h). Mon–Sat 9:30–17:00, book at least 48 hours ahead, 18+. Not ideal right before a drive if you are the driver.') } ],
+    eat:[
+      { name:'The Drouthy Cobbler', ty:['pub'], url:GM('The Drouthy Cobbler, High Street, Elgin'), note:I('High Street, seizoensgebonden comfortfood','High Street, seasonal comfort food') },
+      { name:'The Ditsy Teacup', url:GM('The Ditsy Teacup, Thunderton Place, Elgin'), note:I('Thunderton Place, soep en scones','Thunderton Place, soup and scones') },
+      { name:'Orrin Restaurant &amp; Bar', url:GM('Orrin Restaurant and Bar, South Street, Elgin'), note:I('South Street, moderne keuken','South Street, modern menu') } ] },
+  { segs:['s3'], from:I('Elgin → Craigellachie','Elgin → Craigellachie'), via:I('A941 via Rothes','A941 via Rothes'), mi:13, km:21, min:25,
+    stops:[
+      { opt:true, name:'Speyside Cooperage', url:'https://www.speysidecooperage.co.uk/',
+        note:I('Alleen haalbaar als je vrijdag vóór ± 12:00 vertrekt: rondleidingen elk heel uur, vooraf boeken, vr tot 15:00, za dicht.','Only works if you leave before about 12:00 on Friday: tours on the hour, book ahead, Fri until 15:00, closed Sat.') },
+      { opt:true, ty:['whisky'], name:'Glen Grant Distillery', url:'https://www.theglengrant.com/en-us/',
+        note:I('Distilleerderij in Rothes. Bezoekerstijden niet gevonden.','Distillery in Rothes. Visitor hours not found.') } ],
+    eat:[
+      { name:'Highlander Inn', ty:['pub','whisky'], url:'https://www.whiskyinn.com/', note:I('Craigellachie, dorpsherberg met whiskybar; volgens een gids huisgemaakte soep en haggisbeignets. Tijden niet gecontroleerd.','Craigellachie, village inn with a whisky bar; a guide mentions homemade soup and haggis fritters. Hours not checked.') },
+      { name:'Copper Dog', ty:['pub'], url:GM('Copper Dog, Craigellachie Hotel, Craigellachie'), note:I('Craigellachie, Schotse gerechten; live muziek vr/za','Craigellachie, Scottish dishes; live music Fri/Sat') },
+      { name:'Toot’s Café Bar', url:GM('Toot\'s Café Bar, Rothes'), note:I('Rothes, gevarieerde menukaart','Rothes, varied menu') } ] },
+  { segs:['s4'], from:I('Craigellachie → Grantown-on-Spey','Craigellachie → Grantown-on-Spey'), via:I('A95 via Aberlour en Ballindalloch','A95 via Aberlour and Ballindalloch'), mi:25, km:40, min:40,
+    stops:[
+      { opt:true, ty:['whisky'], name:'The Cairn Distillery', url:'https://www.thecairndistillery.com/distillery-experiences',
+        note:I('In Grantown. Open 9:30–16:30. Explorer 75 min £25, Adventurer 2 u £60 (3 speciale drams en tapas in The Gathering); 18+, online boeken. Vrijdag alleen haalbaar als je vóór ± 15:00 aankomt.','In Grantown. Open 9:30–16:30. Explorer 75 min £25, Adventurer 2 h £60 (3 special drams and tapas at The Gathering); 18+, book online. On Friday only if you arrive before about 15:00.') },
+      { opt:true, ty:['hike'], name:'Anagach Woods &amp; River Spey', url:'https://www.walkhighlands.co.uk/cairngorms/anagach-woods.shtml',
+        note:I('Rondwandeling vanuit het centrum van Grantown: 11,5 km, 2,5–3,5 uur, 250 m stijgen, langs de Old Spey Bridge (1754).','Circular walk from Grantown town centre: 11.5 km, 2.5–3.5 h, 250 m ascent, past the Old Spey Bridge (1754).') } ],
+    eat:[
+      { name:'The Speyside Hotel', ty:['whisky'], url:'https://thespeysidehotel.co.uk/', note:I('Whiskybar met 107 whiskies en tasting flights; keuken met o.a. venison pie met Blue Murder-kaas','Whisky bar with 107 whiskies and tasting flights; kitchen with e.g. venison pie with Blue Murder cheese') },
+      { name:'The Ben Mhor', ty:['pub'], url:'https://benmhorhotel.co.uk/', note:I('Bar en restaurant in het hotel; menu niet gecontroleerd','Bar and restaurant in the hotel; menu not checked') } ] },
+];
+const DAY2 = [
+  { segs:['s4b','s5'], from:I('Grantown → Ruthven Barracks','Grantown → Ruthven Barracks'), via:I('A95, A9 en B970 via Aviemore','A95, A9 and B970 via Aviemore'), mi:30, km:48, min:45,
+    stops:[
+      { n:1, id:'ruth', ty:['castle'], name:'Ruthven Barracks', url:'https://www.historicenvironment.scot/visit-a-place/places/ruthven-barracks/',
+        note:I('18e-eeuwse kazerne (ruïne) op een heuvel met uitzicht op de Cairngorms, 30–45 min. Het hele jaar open; geen toegangsprijs vermeld.','18th-century barracks ruin on a mound with Cairngorms views, 30–45 min. Open year-round; no admission fee listed.') },
+      { opt:true, id:'loch', ty:['hike','loch','castle'], name:'Loch an Eilein', url:'https://www.walkhighlands.co.uk/cairngorms/loch-an-eilein.shtml',
+        note:I('Rondwandeling om het meer met een kasteelruïne op een eiland: 7 km, ca. 2 uur, 70 m stijgen; parkeergeld per persoon. Niet op de sluitingslijsten na de Cairngorm-brand, maar bel Rothiemurchus vooraf (01479 812345).','Loop round the loch with a castle ruin on an island: 7 km, about 2 h, 70 m ascent; parking fee per person. Not on the closure lists after the Cairngorms wildfire, but call Rothiemurchus first (01479 812345).') },
+      { opt:true, ty:['loch'], name:'Loch Insh', url:'https://lochinsh.com/',
+        note:I('Aan de B970 bij Kincraig, met Boathouse Restaurant en watersportcentrum. Tijden niet gecontroleerd.','On the B970 near Kincraig, with the Boathouse Restaurant and an outdoor centre. Hours not checked.') },
+      { opt:true, ty:['loch'], name:'Loch Morlich', url:GM('Loch Morlich, Glenmore'),
+        note:I('Bij Glenmore; paden rond het meer waren op 7 aug open. Ryvoan Pass en Lochan Uaine zijn gesloten.','At Glenmore; the paths round the loch were open on 7 Aug. Ryvoan Pass and Lochan Uaine are closed.') } ],
+    eat:[ { name:I('Boathouse Restaurant (Loch Insh)','Boathouse Restaurant (Loch Insh)'), url:'https://lochinsh.com/about-us/boathouse-restaurant/', note:I('Koffie of lunch aan het meer; tijden niet gecontroleerd','Coffee or lunch on the loch; hours not checked') } ] },
+  { segs:['s6'], from:I('Ruthven → House of Bruar &amp; Blair Castle','Ruthven → House of Bruar &amp; Blair Castle'), via:I('A9 over de Drumochter Pass','A9 over the Drumochter Pass'), mi:40, km:64, min:50,
+    stops:[
+      { n:2, id:'bruar', name:'House of Bruar', url:'https://www.houseofbruar.com/',
+        note:I('Foodhall en winkels voor kleding en huishoudelijke artikelen, 1–2 uur.','Food hall and shops for clothing and homeware, 1–2 h.') },
+      { n:3, id:'blair', ty:['castle'], name:'Blair Castle', url:'https://atholl-estates.co.uk/blair-castle/',
+        note:I('Zetel van de hertogen van Atholl, 2–3 uur. Openingstijden niet gecontroleerd.','Seat of the Dukes of Atholl, 2–3 h. Hours not checked.') },
+      { opt:true, ty:['whisky'], name:'Dalwhinnie Distillery', url:'https://www.visitcairngorms.com/listing/1226/dalwhinnie-distillery/',
+        note:I('Vlak bij de A9. Sep–dec 10:00–16:00; rondleiding 45 min met 2 drams en chocolade; vooraf boeken. Met een lange rit erna: alleen de passagier proeft.','Just off the A9. Sep–Dec 10:00–16:00; 45-min tour with 2 drams and chocolate; book ahead. With a long drive afterwards, only the passenger tastes.') } ],
+    eat:[
+      { name:'Atholl Arms Hotel (Blair Atholl)', ty:['pub'], url:GM('Atholl Arms Hotel, Blair Atholl'), note:I('Traditioneel Schots eten volgens een gids; tijden niet gecontroleerd','Traditional Scottish food according to a guide; hours not checked') },
+      { name:I('Restaurant House of Bruar','House of Bruar restaurant'), url:'https://www.houseofbruar.com/the-house-of-bruar-restaurant/',
+        note:I('Dagelijks 9:00–17:30; lunch vanaf 12:00, hoofdgerechten tot 16:30; geen reservering nodig. Carvery, pasteien, haggis, soep.','Daily 9:00–17:30; lunch from 12:00, mains until 16:30; no booking needed. Carvery, pies, haggis, soup.') } ] },
+  { segs:['s7'], from:I('Blair Castle → Dunkeld','Blair Castle → Dunkeld'), via:I('A9 via Killiecrankie en Pitlochry','A9 via Killiecrankie and Pitlochry'), mi:22, km:35, min:30,
+    stops:[
+      { opt:true, ty:['hike'], name:'Pass of Killiecrankie', url:'https://www.nts.org.uk/visit/places/killiecrankie',
+        note:I('Rivierkloof met paden naar Soldier’s Leap. Bezoekerscentrum en café 10:00–17:00; parkeren £5.','River gorge with paths to Soldier’s Leap. Visitor centre and café 10:00–17:00; parking £5.') },
+      { opt:true, ty:['whisky'], name:'The Mash Tun Bar (Blair Athol Distillery)', url:GM('Blair Athol Distillery, Pitlochry'),
+        note:I('Whiskybar in Pitlochry. Tijden niet gecontroleerd.','Whisky bar in Pitlochry. Hours not checked.') },
+      { n:4, id:'herm', ty:['hike'], name:'The Hermitage', url:'https://www.nts.org.uk/visit/places/the-hermitage',
+        note:I('Boswandeling naar Black Linn Falls en Ossian’s Hall, 45 min–2 uur. Dagelijks open, gratis toegang; parkeren £5 per auto.','Woodland walk to Black Linn Falls and Ossian’s Hall, 45 min–2 h. Open daily, free entry; parking £5 per car.') } ],
+    eat:[
+      { name:'Port-na-Craig Inn (Pitlochry)', ty:['pub'], url:GM('Port-na-Craig Inn, Pitlochry'), note:I('Traditionele herberg aan de rivier; tijden niet gecontroleerd','Traditional riverside inn; hours not checked') },
+      { name:'The Coach House (Fisher’s Hotel)', ty:['pub','whisky'], url:GM('The Coach House, Fishers Hotel, Pitlochry'), note:I('Pitlochry, lokale seizoensgerechten de hele dag en 80+ malts','Pitlochry, local seasonal dishes all day and 80+ malts') },
+      { name:'The Taybank', ty:['pub'], url:'https://www.thetaybank.co.uk/lunch-menu', note:I('Dunkeld; barlunch ma–za 12:00–14:45. Menu is eerder modern dan klassiek pubeten.','Dunkeld; bar lunch Mon–Sat 12:00–14:45. The menu is modern rather than classic pub food.') },
+      { name:'Aran Bakery (Birnam)', url:GM('Aran Bakery, Birnam'), note:I('Bakkerij; tijden niet bevestigd','Bakery; hours not confirmed') } ] },
+  { segs:['s8'], from:I('Dunkeld → Scone Palace (Perth)','Dunkeld → Scone Palace (Perth)'), via:I('A9 / A93','A9 / A93'), mi:18, km:29, min:20,
+    stops:[
+      { n:5, id:'scone', ty:['castle'], name:'Scone Palace', url:'https://www.scone-palace.co.uk/',
+        note:I('Kroningsplaats van Schotse koningen. Open 10:00–17:30, laatste toegang 16:00, £19,75 (paleis + tuinen). Paleis sluit voor bezoekers op 1 november.','Coronation site of Scottish kings. Open 10:00–17:30, last entry 16:00, £19.75 (palace and gardens). Palace closes to visitors on 1 November.') } ],
+    eat:[ { name:I('Koffieshop Scone Palace','Scone Palace coffee shop'), url:'https://www.scone-palace.co.uk/plan-your-visit', note:I('Sluit om 16:30','Closes 16:30') } ] },
+  { segs:['s9a'], from:I('Scone → Lochleven Castle (Kinross)','Scone → Lochleven Castle (Kinross)'), via:I('A9 en M90, afslag Kinross','A9 and M90, Kinross exit'), mi:18, km:29, min:25,
+    stops:[
+      { n:6, id:'lochl', ty:['castle','loch'], name:'Lochleven Castle', url:'https://www.historicenvironment.scot/visit-a-place/places/lochleven-castle/',
+        note:I('Kasteelruïne op een eiland in Loch Leven, per boot. Laatste boot 15:30 (t/m 30 sep), in oktober 14:00; vooraf boeken; ca. 1–1,5 uur. Alleen haalbaar als je Hermitage en Scone laat vallen.','Castle ruin on an island in Loch Leven, by boat. Last boat 15:30 (to 30 Sep), 14:00 in October; book ahead; about 1–1.5 h. Only works if you drop the Hermitage and Scone.') } ],
+    eat:[] },
+  { segs:['s9b'], from:I('Kinross → South Queensferry → Edinburgh','Kinross → South Queensferry → Edinburgh'), via:I('M90 en Queensferry Crossing','M90 and the Queensferry Crossing'), mi:28, km:45, min:40,
+    stops:[
+      { n:7, id:'qf', name:I('Forth-bruggen, South Queensferry','Forth bridges, South Queensferry'), url:GM('Forth Bridges viewpoint, South Queensferry'),
+        note:I('Drie bruggen over de Forth vanaf de waterkant, ca. 30 min.','Three bridges over the Forth from the waterfront, about 30 min.') } ],
+    eat:[
+      { name:'Hawes Inn', ty:['pub'], url:GM('Hawes Inn, South Queensferry'), note:I('Klassieke pub tegenover de aanlegsteiger; goed voor het diner bij aankomst','Classic pub opposite the landing; good for dinner on arrival') },
+      { name:'Rouge Bros The Boat House', url:GM('Rouge Bros The Boat House, South Queensferry'), note:I('Zeevruchten met zicht op de brug','Seafood with a bridge view') },
+      { name:'Railbridge Bistro', url:GM('Railbridge Bistro, South Queensferry'), note:I('Informeel, zicht op de Forth Bridge','Casual, Forth Bridge view') },
+      { name:'Orocco Pier', url:GM('Orocco Pier, South Queensferry'), note:I('Uitgebreider zitten aan het water','Sit-down meal on the water') } ] },
+];
+
+const BUDGET = {
+  d1: I('Tijdsbudget vrijdag: vertrek ± 13:30 uit Inverness, 2 u 10 rijden en Elgin Cathedral 0,75 u geven aankomst in Grantown ± 16:30; met Culloden erbij (1,25 u) ± 17:45. Lunch doe je in Inverness, diner en whisky bij het hotel.',
+        'Friday time budget: leave Inverness about 13:30; 2 h 10 driving and Elgin Cathedral 0.75 h puts you in Grantown about 16:30, or about 17:45 with Culloden (1.25 h). Lunch in Inverness, dinner and whisky at the hotel.'),
+  d2: I('Tijdsbudget zaterdag: vertrek ± 9:30 en aankomst in Edinburgh ± 19:00 is 9,5 u: 3 u 30 rijden en 6 u voor stops. Kasteelroute: Ruthven 0,75 + lunch in Blair Atholl 1,25 + Blair Castle 2 + Hermitage 1 = 5 u. Meren-route: Loch an Eilein 2,5 (incl. omrit) + Ruthven 0,75 + pubmaaltijd 1,25 + Hermitage 1 = 5,5 u. Lochleven past alleen als je Hermitage en Scone laat vallen en vóór 15:30 in Kinross bent.',
+        'Saturday time budget: leaving about 9:30 and arriving in Edinburgh about 19:00 is 9.5 h: 3 h 30 driving and 6 h for stops. Castle route: Ruthven 0.75 + lunch in Blair Atholl 1.25 + Blair Castle 2 + Hermitage 1 = 5 h. Loch route: Loch an Eilein 2.5 (incl. detour) + Ruthven 0.75 + pub meal 1.25 + Hermitage 1 = 5.5 h. Lochleven only works if you drop the Hermitage and Scone and reach Kinross before 15:30.')
+};
+
+const WARN = [
+  I('Vrijdag en zaterdag: Ballindalloch Castle is dicht (en het seizoen eindigt 30 september) en Speyside Cooperage geeft zaterdag geen rondleidingen (vrijdag tot 15:00). Ze staan daarom niet meer in de hoofdroute.','Friday and Saturday: Ballindalloch Castle is closed (and the season ends 30 September) and Speyside Cooperage runs no tours on Saturdays (Fridays until 15:00). They are no longer in the main route.'),
+  I('Whisky: The Cairn (Grantown) is open 9:30–16:30, dus vrijdag alleen haalbaar als je vóór ± 15:00 aankomt. De bar van The Speyside Hotel is je avondoptie zonder autorit erna.','Whisky: The Cairn (Grantown) is open 9:30–16:30, so on Friday it only works if you arrive before about 15:00. The Speyside Hotel bar is your evening option with no drive afterwards.'),
+  I('Cairngorm-brand (aug 2026): Ryvoan Pass, Lochan Uaine en delen van Glenmore zijn gesloten (stand van 7 augustus; wegen en de paden rond Loch Morlich waren open). Loch an Eilein stond niet op de sluitingslijsten, maar check Rothiemurchus vooraf.','Cairngorms wildfire (Aug 2026): Ryvoan Pass, Lochan Uaine and parts of Glenmore are closed (as of 7 August; roads and the paths around Loch Morlich were open). Loch an Eilein was not on the closure lists I saw, but check with Rothiemurchus first.'),
+  I('Seizoenen: Elgin Cathedral heeft vanaf 1 oktober laatste toegang 15:00; Lochleven Castle heeft in oktober de laatste boot om 14:00 (in september 15:30); Scone Palace sluit op 1 november.','Seasons: from 1 October Elgin Cathedral’s last entry is 15:00; Lochleven Castle’s last boat is 14:00 in October (15:30 in September); Scone Palace closes on 1 November.'),
+  I('Wegwerkzaamheden: op de A9 bij Ballinluig staan tot 29 september ’s nachts verkeerslichten; de werken bij Tomatin–Moy liggen niet op deze route. De A96 is niet gecontroleerd: kijk vooraf op <a href="https://www.traffic.gov.scot/" target="_blank" rel="noopener noreferrer">Traffic Scotland</a>.',
+    'Roadworks: on the A9 at Ballinluig there are overnight traffic lights until 29 September; the Tomatin–Moy works are not on this route. The A96 was not checked: see <a href="https://www.traffic.gov.scot/" target="_blank" rel="noopener noreferrer">Traffic Scotland</a> before you go.')
+];
+
+const THEMES = [
+  { t:'whisky', txt:I('Proeverij bij het hotel: in Grantown de whiskybar van The Speyside Hotel (107 whiskies, tasting flights) of The Cairn Distillery. Fortingall heeft proeverijen in het hotel zelf.','A tasting at the hotel: in Grantown the whisky bar at The Speyside Hotel (107 whiskies, tasting flights) or The Cairn Distillery. The Fortingall runs tastings in the hotel itself.') },
+  { t:'hike', txt:I('Loch an Eilein (7 km, ca. 2 uur, 70 m stijgen), Anagach Woods vanuit Grantown (11,5 km), of korter op zaterdag: The Hermitage en Killiecrankie.','Loch an Eilein (7 km, about 2 h, 70 m ascent), Anagach Woods from Grantown (11.5 km), or shorter on Saturday: The Hermitage and Killiecrankie.') },
+  { t:'pub', txt:I('Vrijdag: Highlander Inn of Copper Dog in Craigellachie. Zaterdag: Atholl Arms (Blair Atholl) of Port-na-Craig Inn (Pitlochry). Zaterdagavond: Hawes Inn in South Queensferry.','Friday: Highlander Inn or Copper Dog in Craigellachie. Saturday: Atholl Arms (Blair Atholl) or Port-na-Craig Inn (Pitlochry). Saturday evening: Hawes Inn in South Queensferry.') },
+  { t:'castle', txt:I('Elgin Cathedral (vrijdag), Ruthven Barracks, Blair Castle, Lochleven Castle en de kasteelruïne op het eiland in Loch an Eilein (zaterdag).','Elgin Cathedral (Friday), Ruthven Barracks, Blair Castle, Lochleven Castle and the castle ruin on the island in Loch an Eilein (Saturday).') },
+  { t:'loch', txt:I('Loch an Eilein, Loch Insh (B970, Kincraig), Loch Morlich en Loch Leven; bij Fortingall Loch Tay.','Loch an Eilein, Loch Insh (B970, Kincraig), Loch Morlich and Loch Leven; Loch Tay near Fortingall.') },
+];
+
+const HOTELS_INV = [
+  { name:'River Ness Hotel', book:'https://www.booking.com/hotel/gb/river-ness-a-member-of-radisson-individuals.html', map:GM('River Ness Hotel, Church Street, Inverness'), site:'https://www.radissonhotels.com/en-us/hotels/radisson-individuals-riverness-inverness',
+    note:I('83–97 Church Street, in het centrum en 4 minuten lopen van het station. 4 sterren (Radisson Individuals), restaurant en bar. Parkeren: externe parkeergarage (Rose Street). Booking.com 9,0 (3.849 beoordelingen, 20 sep 2026).','83–97 Church Street, in the city centre and a 4-minute walk from the station. 4-star (Radisson Individuals), restaurant and bar. Parking: off-site multi-storey (Rose Street). Booking.com 9.0 (3,849 reviews, 20 Sep 2026).') },
+  { name:'Glen Mhor Hotel', book:'https://www.booking.com/hotel/gb/glen-mhor.html', map:GM('Glen Mhor Hotel, Ness Bank, Inverness'), site:'https://www.glen-mhor.com/',
+    note:I('Ness Bank, aan de rivier de Ness. 110 kamers in 10 Victoriaanse gebouwen plus 11 appartementen; brouwerij en distilleerderij (“Brewstillery”) in het hotel, restaurant Uile-bheist. Parkeren: £12 per nacht. Booking.com 8,2 (4.981 beoordelingen, 20 sep 2026): onder de 8,5.','Ness Bank, on the River Ness. 110 rooms in 10 Victorian buildings plus 11 apartments; brewery and distillery (“Brewstillery”) on site, Uile-bheist restaurant. Parking: £12 per night. Booking.com 8.2 (4,981 reviews, 20 Sep 2026): below the 8.5 bar.') },
+];
+const HOTELS_EDI = [
+  { name:'The Hoxton, Edinburgh', book:'https://www.booking.com/hotel/gb/the-hoxton-edinburgh.html', map:GM('The Hoxton, 5-21 Grosvenor Street, Edinburgh'), site:'https://thehoxton.com/edinburgh/',
+    note:I('5–21 Grosvenor Street (Haymarket): 214 kamers in 11 gerestaureerde Georgiaanse herenhuizen, 5 minuten lopen van station Haymarket. Restaurant Patatino en Lobby Bar.','5–21 Grosvenor Street (Haymarket): 214 rooms in 11 restored Georgian townhouses, a 5-minute walk from Haymarket station. Patatino restaurant and the Lobby Bar.') },
+  { name:'Hotel Indigo Edinburgh – Princes Street', book:'https://www.booking.com/hotel/gb/royal-british.en-gb.html', map:GM('Hotel Indigo Edinburgh Princes Street'), site:'https://www.ihg.com/hotelindigo/hotels/us/en/edinburgh/ediin/hoteldetail',
+    note:I('Aan Princes Street (IHG). Kamers, faciliteiten en parkeren nog niet nagekeken.','On Princes Street (IHG). Rooms, facilities and parking not yet checked.') },
+];
+
+const OVERNIGHT = [
+  { id:'gra', segs:[], town:'Grantown-on-Spey', ty:['whisky','hike'], tag:I('Whisky bij het hotel','Whisky at the hotel'),
+    why:I('Rustig Speyside-stadje aan de A95, dus geen omweg. Whisky zonder autorit erna: de bar van The Speyside Hotel (107 whiskies, tasting flights) en The Cairn Distillery (9:30–16:30). Anagach Woods begint in het stadje. Vrijdag ≈ 2 u 10 rijden, zaterdag ≈ 3 u 30.','Quiet Speyside market town on the A95, so no detour. Whisky without a drive afterwards: the bar at The Speyside Hotel (107 whiskies, tasting flights) and The Cairn Distillery (9:30–16:30). Anagach Woods starts in the town. Friday ≈ 2 h 10 driving, Saturday ≈ 3 h 30.'),
+    hotels:[ { name:I('Hotels in Grantown-on-Spey','Hotels in Grantown-on-Spey'), book:BKS('Grantown-on-Spey'), bookSearch:true, map:GM('hotels Grantown-on-Spey'),
+      note:I('Scores hier niet kunnen controleren (Booking.com blokkeerde het ophalen); The Speyside Hotel heeft de whiskybar.','I could not check scores here (Booking.com blocked the lookup); The Speyside Hotel has the whisky bar.') } ] },
+  { id:'avi', segs:[], town:'Aviemore', ty:['pub','loch','hike'], tag:I('Meeste voorzieningen','Most facilities'),
+    why:I('Grootste plaats met de meeste restaurants en hotels, direct aan de A9. Diner in de Old Bridge Inn (Highland pub, keuken 17:00–20:30, reserveren); Loch an Eilein ligt vlakbij. Vrijdag ≈ 2 u 35 rijden, zaterdag ≈ 3 u.','Biggest hub with the most restaurants and hotels, right by the A9. Dinner at the Old Bridge Inn (Highland pub, kitchen 17:00–20:30, book ahead); Loch an Eilein is close. Friday ≈ 2 h 35 driving, Saturday ≈ 3 h.'),
+    hotels:[ { name:I('Hotels in Aviemore','Hotels in Aviemore'), book:BKS('Aviemore'), bookSearch:true, map:GM('hotels Aviemore'),
+      note:I('Gezien op 20 sep 2026: Ravenscraig Guest House 9,5, Ardlogie Guest House 9,8. De Macdonald-resorthotels scoren 7,2.','Seen on 20 Sep 2026: Ravenscraig Guest House 9.5, Ardlogie Guest House 9.8. The Macdonald resort hotels score 7.2.') } ] },
+  { id:'kin', segs:[], town:'Kingussie', ty:['castle'], tag:I('Kortere zaterdag','Shorter Saturday'),
+    why:I('Ca. 15–20 min ten zuiden van Aviemore; Ruthven Barracks ligt vlakbij. Vrijdag ≈ 2 u 55 rijden, zaterdag ≈ 2 u 50.','About 15–20 min south of Aviemore; Ruthven Barracks is nearby. Friday ≈ 2 h 55 driving, Saturday ≈ 2 h 50.'),
+    hotels:[ { name:I('Hotels in Kingussie','Hotels in Kingussie'), book:BKS('Kingussie'), bookSearch:true, map:GM('hotels Kingussie'),
+      note:I('Gezien op 20 sep 2026: The Osprey Hotel 9,3, Star Hotel 9,3, Clune House B&amp;B 9,7. Duke of Gordon scoort 7,6 en is geschrapt.','Seen on 20 Sep 2026: The Osprey Hotel 9.3, Star Hotel 9.3, Clune House B&amp;B 9.7. Duke of Gordon scores 7.6 and is dropped.') } ] },
+  { id:'pit', segs:[], town:'Pitlochry', ty:['whisky','pub'], tag:I('A9 rechtstreeks','Straight down the A9'),
+    why:I('Slaat Elgin en Speyside over: Inverness → Pitlochry is ca. 2 u rijden, Pitlochry → Edinburgh ca. 1 u 35. Whisky in de stad: The Mash Tun Bar (Blair Athol Distillery) en The Coach House (80+ malts).','Skips Elgin and Speyside: Inverness → Pitlochry is about 2 h, Pitlochry → Edinburgh about 1 h 35. Whisky in town: The Mash Tun Bar (Blair Athol Distillery) and The Coach House (80+ malts).'),
+    hotels:[ { name:I('Hotels in Pitlochry','Hotels in Pitlochry'), book:BKS('Pitlochry'), bookSearch:true, map:GM('hotels Pitlochry'),
+      note:I('Gezien op 20 sep 2026: Dunfallandy House Hotel 9,3, The Old Mill Inn 9,3, Craigatin House 9,4.','Seen on 20 Sep 2026: Dunfallandy House Hotel 9.3, The Old Mill Inn 9.3, Craigatin House 9.4.') } ] },
+  { id:'fort', segs:['sf'], town:'Fortingall', ty:['whisky','hike','pub','loch'], tag:I('Buiten de route','Off-route'),
+    why:I('In Glen Lyon, ca. 35–40 min buiten de A9 via Ballinluig en Aberfeldy. Volgens het hotel 2 u vanaf Inverness en 1 u 30 naar Edinburgh: samen ≈ 3 u 30 rijden, evenveel als de A9 rechtstreeks en ruim 2 uur minder dan de Speyside-lus, maar Elgin en Speyside vallen dan af. Luxehotel met 10 kamers, restaurant, Ewe Pub, cocktailbar en whiskyproeverijen; de Fortingall Yew staat in het kerkhof, Loch Tay is vlakbij en Aberfeldy Distillery (ma–za 10:00–18:00) ligt ca. 9 mi verderop. Prijs en beschikbaarheid niet gecontroleerd.','In Glen Lyon, about 35–40 min off the A9 via Ballinluig and Aberfeldy. According to the hotel 2 h from Inverness and 1 h 30 to Edinburgh: about 3 h 30 driving in total, the same as the A9 direct and over 2 hours less than the Speyside loop, but Elgin and Speyside drop out. Luxury hotel with 10 rooms, a restaurant, the Ewe Pub, a cocktail bar and whisky tastings; the Fortingall Yew stands in the churchyard, Loch Tay is close and Aberfeldy Distillery (Mon–Sat 10:00–18:00) is about 9 mi away. Price and availability not checked.'),
+    hotels:[ { name:I('The Fortingall','The Fortingall'), book:BKS('The Fortingall Hotel, Fortingall, Aberfeldy'), bookSearch:true, map:GM('The Fortingall, Fortingall, Aberfeldy'), site:'https://www.fortingall.com/',
+      note:I('Staat op Booking.com (66 geverifieerde beoordelingen; score niet gecontroleerd). Direct boeken kan ook via de website of 01887 830 367.','Listed on Booking.com (66 verified reviews; score not checked). You can also book direct via the website or +44 1887 830 367.') } ] },
+];
+
+/* ---------- map markers ---------- */
+const MK = [
+  { id:'cul',  k:'d1', n:1, layer:'d1', label:'Culloden',      dx:0,   dy:27, a:'middle' },
+  { id:'elg',  k:'d1', n:2, layer:'d1', label:'Elgin',         dx:0,   dy:-18, a:'middle' },
+  { id:'crai', k:'opt',layer:'d1', label:'Cooperage',         dx:0,   dy:24, a:'middle' },
+  { id:'gra',  k:'ov', layer:'ov', label:'Grantown',          dx:-14, dy:5,  a:'end' },
+  { id:'avi',  k:'ov', layer:'ov', label:'Aviemore',          dx:-14, dy:5,  a:'end' },
+  { id:'kin',  k:'ov', layer:'ov', label:'Kingussie',         dx:-14, dy:5,  a:'end', ox:-6, oy:-8 },
+  { id:'pit',  k:'ov', layer:'ov', label:'Pitlochry',         dx:14,  dy:5,  a:'start' },
+  { id:'fort', k:'ov', layer:'ov', label:'Fortingall',        dx:-14, dy:5,  a:'end' },
+  { id:'ruth', k:'d2', n:1, layer:'d2', label:'Ruthven',       dx:17,  dy:6,  a:'start', ox:12, oy:14 },
+  { id:'loch', k:'opt',layer:'d2', label:'Loch an Eilein',    dx:12,  dy:5,  a:'start', ox:6, oy:9 },
+  { id:'bruar',k:'d2', n:2, layer:'d2', label:'Bruar',         dx:-21, dy:5,  a:'end' },
+  { id:'blair',k:'d2', n:3, layer:'d2', label:'Blair Castle',  dx:17,  dy:5,  a:'start' },
+  { id:'herm', k:'d2', n:4, layer:'d2', label:'Hermitage',     dx:17,  dy:5,  a:'start' },
+  { id:'scone',k:'d2', n:5, layer:'d2', label:'Scone Palace',  dx:17,  dy:5,  a:'start' },
+  { id:'lochl',k:'d2', n:6, layer:'d2', label:'Lochleven',     dx:17,  dy:5,  a:'start' },
+  { id:'qf',   k:'d2', n:7, layer:'d2', label:'Queensferry',   dx:-17, dy:5,  a:'end' },
+  { id:'inv',  k:'end',layer:'d1', label:'Inverness',         dx:-13, dy:5,  a:'end', big:true },
+  { id:'edi',  k:'end',layer:'d2', label:'Edinburgh',         dx:0,   dy:29, a:'middle', big:true },
+];
+const SEGCLS = { s1:'d1', s2:'d1', s3:'d1', s4:'d1', s4b:'d2', s5:'d2', s6:'d2', s7:'d2', s8:'d2', s9a:'d2', s9b:'d2' };
+
+/* ---------- state ---------- */
+let view = 'all';
+let sel = null; // { segs:[], stops:[] }
+
+const el = id => document.getElementById(id);
+const pick = o => (o && typeof o === 'object' && 'nl' in o) ? o[lang] : o;
+const fmtHM = m => { const h = Math.floor(m/60), r = m % 60; const u = UI[lang]; return h ? `${h} ${u.h}${r ? ' ' + String(r).padStart(2,'0') : ''}` : `${r} ${u.min}`; };
+
+/* ---------- render: map ---------- */
+function renderMap(){
+  const u = UI[lang], P = GEO.pts, L = GEO.labels;
+  const svg = el('map');
+  svg.setAttribute('aria-label', u.mapLabel);
+  svg.setAttribute('viewBox', `0 0 ${GEO.W} ${GEO.H}`);
+  let s = `<rect class="sea" width="${GEO.W}" height="${GEO.H}"/><path class="land" d="${GEO.coast}"/><path class="ness" d="${GEO.ness}"/>`;
+  s += `<text class="seaTxt" x="${L.moray[0]}" y="${L.moray[1]}" text-anchor="middle">Moray Firth</text>`;
+  s += `<text class="seaTxt" x="${GEO.W-14}" y="${L.forth[1]}" text-anchor="end">Firth of Forth</text>`;
+  s += `<text class="seaTxt" x="${L.ness[0]}" y="${L.ness[1]}" text-anchor="middle" transform="rotate(-52 ${L.ness[0]} ${L.ness[1]})">Loch Ness</text>`;
+  s += `<text class="regTxt" x="${L.speyside[0]}" y="${L.speyside[1]}" text-anchor="middle">SPEYSIDE</text>`;
+  s += `<text class="regTxt" x="${GEO.W-24}" y="${L.cairngorms[1]-22}" text-anchor="end">CAIRNGORMS</text>`;
+  s += `<text class="regTxt" x="${L.perthshire[0]}" y="${L.perthshire[1]}" text-anchor="middle">PERTHSHIRE</text>`;
+  s += `<text class="regTxt" x="${GEO.W-20}" y="${L.fife[1]}" text-anchor="end">FIFE</text>`;
+  // segments
+  for (const day of ['d1','d2']) {
+    s += `<g class="layer ${day}">`;
+    for (const [id, cls] of Object.entries(SEGCLS)) if (cls === day) {
+      s += `<path class="casing" d="${GEO.segs[id]}"/><path class="seg-${day}" data-seg="${id}" d="${GEO.segs[id]}"/><path class="seg-hit" data-seg="${id}" d="${GEO.segs[id]}"/>`;
+    }
+    s += `</g>`;
+  }
+  s += `<g class="layer ov"><path class="casing" d="${GEO.segs.sf}"/><path class="seg-sp" data-seg="sf" d="${GEO.segs.sf}"/><path class="seg-hit" data-seg="sf" d="${GEO.segs.sf}"/></g>`;
+  // markers
+  for (const layer of ['d1','d2','ov']) {
+    s += `<g class="layer ${layer}">`;
+    for (const m of MK.filter(m => m.layer === layer)) {
+      const x = P[m.id][0] + (m.ox||0), y = P[m.id][1] + (m.oy||0);
+      let shape = '';
+      if (m.k === 'd1') shape = `<circle class="halo" r="16"/><circle class="ring" r="12.5"/><circle class="shape-d1" r="11"/><text class="num d1">${m.n}</text>`;
+      if (m.k === 'd2') shape = `<rect class="halo" x="-15" y="-15" width="30" height="30" rx="7"/><rect class="ring" x="-12.5" y="-12.5" width="25" height="25" rx="6"/><rect class="shape-d2" x="-11" y="-11" width="22" height="22" rx="5"/><text class="num d2">${m.n}</text>`;
+      if (m.k === 'ov') shape = `<rect class="halo" x="-13" y="-13" width="26" height="26" transform="rotate(45)"/><rect class="ring" x="-10.5" y="-10.5" width="21" height="21" transform="rotate(45)"/><rect class="shape-ov" x="-9" y="-9" width="18" height="18" transform="rotate(45)"/>`;
+      if (m.k === 'opt') shape = `<circle class="opt-shape" r="6.5"/>`;
+      if (m.k === 'end') shape = `<circle class="end" r="7"/>`;
+      const label = `<text class="lbl2${m.k==='opt'?' opt':''}${m.big?' big':''}" x="${m.dx}" y="${m.dy}" text-anchor="${m.a}">${m.label}</text>`;
+      const interactive = m.k !== 'end';
+      s += `<g class="mk" data-stop="${m.id}" transform="translate(${x} ${y})"${interactive ? ' role="button" tabindex="0"' : ''} aria-label="${m.label}">${shape}${label}</g>`;
+    }
+    s += `</g>`;
+  }
+  // scale + north
+  s += `<g class="scale" transform="translate(16 ${GEO.H-26})"><line x1="0" y1="0" x2="${GEO.scalePx}" y2="0"/><line x1="0" y1="-5" x2="0" y2="5"/><line x1="${GEO.scalePx}" y1="-5" x2="${GEO.scalePx}" y2="5"/><text x="0" y="-9">${u.scale}</text></g>`;
+  s += `<g class="north" transform="translate(${GEO.W-26} 30)"><path d="M0 -14 L6 6 L0 2 L-6 6 Z"/><text x="0" y="22" text-anchor="middle">N</text></g>`;
+  svg.innerHTML = s;
+  svg.dataset.view = view;
+  applySel();
+}
+
+/* ---------- render: chrome ---------- */
+function renderChrome(){
+  const u = UI[lang];
+  document.documentElement.lang = lang;
+  el('kicker').textContent = u.kicker;
+  el('sub').textContent = u.sub;
+  el('lang-nl').setAttribute('aria-pressed', lang === 'nl');
+  el('lang-en').setAttribute('aria-pressed', lang === 'en');
+  const pb = el('printbtn'); pb.hidden = !STANDALONE; pb.textContent = u.print;
+  const sum = rows => rows.reduce((a, r) => ({ mi:a.mi+r.mi, km:a.km+r.km, min:a.min+r.min }), { mi:0, km:0, min:0 });
+  const a = sum(DAY1), b = sum(DAY2);
+  const t = { mi:a.mi+b.mi, km:a.km+b.km, min:a.min+b.min };
+  const drv = (lbl, cls, o, s) => `<div><div class="lbl">${cls ? `<span class="k ${cls}"></span>` : ''}${lbl}</div><div class="val">${o.mi} mi · ${o.km} km<small>≈ ${fmtHM(o.min)} ${u.drive}${s ? ' · ' + s : ''}</small></div></div>`;
+  el('glance').setAttribute('aria-label', u.glance);
+  el('glance').innerHTML =
+    `<div><div class="lbl"><span class="k end"></span>${u.gThu}</div><div class="val">${u.gThuV}<small>${u.gThuS}</small></div></div>` +
+    drv(u.gFri, 'd1', a, u.friS) + drv(u.gSat, 'd2', b, u.satS) +
+    `<div><div class="lbl"><span class="k end"></span>${u.gSun}</div><div class="val">${u.gSunV}<small>${u.gSunS}</small></div></div>` +
+    drv(u.gTot, '', t, '');
+  const f = u.filt;
+  const chips = [['all',f.all,''],['d1',f.d1,'d1'],['ov',f.ov,'ov'],['d2',f.d2,'d2']];
+  const fe = el('filters'); fe.setAttribute('aria-label', u.filtLabel);
+  fe.innerHTML = chips.map(([v, l, k]) => `<button type="button" class="chip" data-view="${v}" aria-pressed="${view===v}">${k ? `<span class="k ${k}"></span>` : ''}${l}</button>`).join('');
+  const lg = u.leg;
+  el('legend').innerHTML = `<span><i class="k d1"></i>${lg.d1}</span><span><i class="k d2"></i>${lg.d2}</span><span><i class="k ov"></i>${lg.ov}</span><span><i class="k sp"></i>${lg.sp}</span><span><i class="k opt"></i>${lg.opt}</span><span><i class="k end"></i>${lg.end}</span>`;
+  el('mapnote').textContent = u.mapNote;
+}
+
+/* ---------- render: content ---------- */
+function stopsHTML(stops, kind){
+  const u = UI[lang];
+  return `<ul class="items">` + stops.map(s => {
+    const name = pick(s.name);
+    const bd = s.opt ? `<span class="bdg opt" title="${u.opt}" aria-label="${u.opt}">+</span>` : `<span class="bdg ${kind}" aria-label="${u.stop} ${s.n}">${s.n}</span>`;
+    return `<li>${bd}<span>${A(name, s.url)}${tysHTML(s.ty)}<span class="note">${pick(s.note)}</span></span></li>`;
+  }).join('') + `</ul>`;
+}
+function eatHTML(eat){
+  if (!eat.length) return '<span class="muted">—</span>';
+  return `<ul class="items noicon">` + eat.map(e => `<li><span>${A(pick(e.name), e.url)}${tysHTML(e.ty)}<span class="note">${pick(e.note)}</span></span></li>`).join('') + `</ul>`;
+}
+function dayTable(rows, kind){
+  const u = UI[lang];
+  return `<table><thead><tr><th>${u.th.seg}</th><th>${u.th.dist}</th><th>${u.th.hl}</th><th>${u.th.eat}</th></tr></thead><tbody>` +
+    rows.map(r => {
+      const stopIds = r.stops.filter(s => s.id).map(s => s.id).join(' ');
+      return `<tr class="row" data-segs="${r.segs.join(' ')}" data-stops="${stopIds}">
+        <td class="c-seg"><div class="from">${pick(r.from)}</div><div class="via">${pick(r.via)}</div></td>
+        <td class="c-dist" data-label="${u.th.dist}"><div class="mono">${r.mi} mi · ${r.km} km</div><div class="mono muted">${fmtHM(r.min)}</div></td>
+        <td data-label="${u.th.hl}">${stopsHTML(r.stops, kind)}</td>
+        <td data-label="${u.th.eat}">${eatHTML(r.eat)}</td></tr>`;
+    }).join('') + `</tbody></table>`;
+}
+function hotelHTML(h){
+  const u = UI[lang];
+  const links = [
+    A(h.bookSearch ? u.bookSearch : u.booking, h.book, 'book'),
+    A(u.map, h.map),
+    h.site ? A(u.site, h.site) : ''
+  ].filter(Boolean).join(' ');
+  const note = h.note ? pick(h.note) : '';
+  return `<div class="hotel"><div class="hname">${pick(h.name)}</div>${note ? `<div class="hnote">${note}</div>` : ''}<div class="hlinks">${links}</div></div>`;
+}
+function overnightTable(){
+  const u = UI[lang];
+  return `<table><thead><tr><th>${u.th.town}</th><th>${u.th.why}</th><th>${u.th.hotels}</th></tr></thead><tbody>` +
+    OVERNIGHT.map(o => `<tr class="row" data-segs="${o.segs.join(' ')}" data-stops="${o.id}">
+      <td class="c-town"><div class="town">${o.town}${tysHTML(o.ty)}</div><span class="tag">${pick(o.tag)}</span></td>
+      <td data-label="${u.th.why}">${pick(o.why)}</td>
+      <td data-label="${u.th.hotels}"><div class="hotels-in">${o.hotels.map(hotelHTML).join('')}</div></td></tr>`).join('') + `</tbody></table>`;
+}
+function tyLegend(){
+  return `<div class="tylegend">${Object.keys(TYPES).map(t => `<span>${tyIcon(t)}${TYPES[t][lang]}</span>`).join('')}</div>`;
+}
+function themesHTML(){
+  return `<ul class="themes">${THEMES.map(x => `<li>${tyIcon(x.t)}<b>${TYPES[x.t][lang]}</b><span>${pick(x.txt)}</span></li>`).join('')}</ul>`;
+}
+function h2(kind, text){ return `<h2><span class="k ${kind}"></span>${text}</h2>`; }
+function renderContent(){
+  const u = UI[lang];
+  el('content').innerHTML =
+    `<div class="warn"><h3>${u.warnH}</h3><ul>${WARN.map(w => `<li>${pick(w)}</li>`).join('')}</ul></div>` +
+    h2('end', u.themesH) + tyLegend() + themesHTML() +
+    h2('end', u.startH) + `<p class="sect-note">${u.startSub}</p><div class="hotel-grid">${HOTELS_INV.map(hotelHTML).join('')}</div>` +
+    h2('d1', u.d1H) + dayTable(DAY1, 'd1') + `<p class="budget">${pick(BUDGET.d1)}</p>` +
+    h2('ov', u.ovH) + `<p class="sect-note">${u.ovSub}</p>` + overnightTable() +
+    h2('d2', u.d2H) + dayTable(DAY2, 'd2') + `<p class="budget">${pick(BUDGET.d2)}</p>` +
+    h2('end', u.endH) + `<p class="sect-note">${u.endSub}</p><div class="hotel-grid">${HOTELS_EDI.map(hotelHTML).join('')}</div>` +
+    `<div class="foot"><p>${u.footChecked}</p><p>${u.footLinks}</p></div>`;
+  applySel();
+}
+
+/* ---------- selection ---------- */
+function applySel(){
+  const svg = el('map');
+  svg.classList.toggle('sel-on', !!sel);
+  svg.querySelectorAll('[data-seg]').forEach(p => p.classList.toggle('hi', !!sel && sel.segs.includes(p.dataset.seg)));
+  svg.querySelectorAll('.mk').forEach(m => m.classList.toggle('hi', !!sel && sel.stops.includes(m.dataset.stop)));
+  document.querySelectorAll('tr.row').forEach(r => {
+    const segs = (r.dataset.segs || '').split(' ').filter(Boolean), stops = (r.dataset.stops || '').split(' ').filter(Boolean);
+    const on = !!sel && (segs.some(s => sel.segs.includes(s)) || stops.some(s => sel.stops.includes(s)));
+    r.classList.toggle('sel', on);
+  });
+}
+const parts = v => (v || '').split(' ').filter(Boolean);
+function selectRow(r){
+  const segs = parts(r.dataset.segs), stops = parts(r.dataset.stops);
+  const same = sel && JSON.stringify(sel.segs) === JSON.stringify(segs) && JSON.stringify(sel.stops) === JSON.stringify(stops);
+  sel = same ? null : { segs, stops };
+  applySel();
+}
+function scrollToRow(r){
+  const rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  r.scrollIntoView({ block:'center', behavior: rm ? 'auto' : 'smooth' });
+}
+function selectStop(id){
+  const r = [...document.querySelectorAll('tr.row')].find(r => parts(r.dataset.stops).includes(id));
+  if (!r) return;
+  sel = { segs:parts(r.dataset.segs), stops:parts(r.dataset.stops) };
+  applySel(); scrollToRow(r);
+}
+function selectSeg(id){
+  const r = [...document.querySelectorAll('tr.row')].find(r => parts(r.dataset.segs).includes(id));
+  if (!r) return;
+  sel = { segs:parts(r.dataset.segs), stops:parts(r.dataset.stops) };
+  applySel(); scrollToRow(r);
+}
+
+/* ---------- events ---------- */
+function setLang(l){
+  lang = l; LS.set('ie-lang', l);
+  renderChrome(); renderMap(); renderContent();
+}
+el('lang-nl').addEventListener('click', () => setLang('nl'));
+el('lang-en').addEventListener('click', () => setLang('en'));
+el('printbtn').addEventListener('click', () => window.print());
+el('filters').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  view = b.dataset.view;
+  el('map').dataset.view = view;
+  el('filters').querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.view === view));
+});
+el('map').addEventListener('click', e => {
+  const seg = e.target.closest('[data-seg]'); const mk = e.target.closest('.mk');
+  if (mk && mk.getAttribute('role') === 'button') selectStop(mk.dataset.stop);
+  else if (seg) selectSeg(seg.dataset.seg);
+});
+el('map').addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const mk = e.target.closest('.mk'); if (mk && mk.getAttribute('role') === 'button'){ e.preventDefault(); selectStop(mk.dataset.stop); }
+});
+el('content').addEventListener('click', e => {
+  if (e.target.closest('a')) return;
+  const r = e.target.closest('tr.row'); if (r) selectRow(r);
+});
+
+/* ---------- boot ---------- */
+(function(){
+  let l = null;
+  try { const h = (location.hash || '').replace('#',''); if (h === 'en' || h === 'nl') l = h; } catch(e){}
+  if (!l) { const s = LS.get('ie-lang'); if (s === 'en' || s === 'nl') l = s; }
+  lang = l || 'nl';
+  renderChrome(); renderMap(); renderContent();
+})();
+</script>
+
+</body>
+</html>

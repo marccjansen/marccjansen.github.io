@@ -38,6 +38,11 @@ defaults:
       type: "projects"
     values:
       layout: "project"
+  -
+    scope:
+      path: "share"
+    values:
+      sitemap: false
 
 markdown: kramdown
 
