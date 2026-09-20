@@ -1,0 +1,4 @@
+Sitemap: https://marccjansen.com/sitemap.xml
+
+User-agent: *
+Disallow: /share/
